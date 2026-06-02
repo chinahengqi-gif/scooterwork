@@ -61,7 +61,6 @@ const stores = [
       </a>
       <nav aria-label="Primary navigation">
         <a href="#products">Products</a>
-        <a href="#stores">Stores</a>
         <a class="nav-button" href="#stores">Explore stores <span>↗</span></a>
       </nav>
     </header>
@@ -129,14 +128,14 @@ const stores = [
       </a>
       <p>Electric scooter parts & accessories.</p>
       <a class="support-email" href="mailto:support@scooter.work">support@scooter.work</a>
+      <a class="footer-link" href="https://wa.me/12029299733" target="_blank" rel="noreferrer">WhatsApp: +1 202 929 9733</a>
+      <a class="footer-link" href="/privacy/">Privacy</a>
       <small>© {new Date().getFullYear()} SCOOTER.WORK</small>
     </footer>
   </body>
 </html>
 
 <style>
-  @import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700&display=swap");
-
   :root {
     color-scheme: dark;
     --bg: #111515;
@@ -154,7 +153,7 @@ const stores = [
     margin: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: "Inter", Arial, sans-serif;
+    font-family: Arial, sans-serif;
   }
   a { color: inherit; text-decoration: none; }
   .shell { width: min(1380px, calc(100% - 48px)); margin-inline: auto; }
@@ -176,7 +175,7 @@ const stores = [
   .hero { display: flex; min-height: 695px; align-items: center; justify-content: center; text-align: center; }
   .hero-copy { display: flex; flex-direction: column; align-items: center; }
   h1, h2, h3 { margin: 0; }
-  h1, h2 { font-family: "Archivo Black", Impact, sans-serif; font-weight: 400; text-transform: uppercase; }
+  h1, h2 { font-family: Impact, "Arial Black", sans-serif; font-weight: 400; text-transform: uppercase; }
   h1 { max-width: 1100px; margin-top: 22px; font-size: clamp(57px, 6.3vw, 92px); line-height: 0.96; letter-spacing: -4px; }
   h1 em { color: var(--acid); font-style: normal; }
   .hero-text { max-width: 620px; margin: 28px 0 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
@@ -207,9 +206,9 @@ const stores = [
   .store-card p { min-height: 48px; color: #67706c; font-size: 14px; line-height: 1.7; }
   .store-card strong { display: block; margin-top: 28px; font-size: 13px; text-transform: uppercase; letter-spacing: 1px; }
   .store-card b { float: right; font-size: 18px; }
-  footer { display: grid; grid-template-columns: 1fr auto auto auto; gap: 28px; align-items: center; min-height: 114px; }
-  footer p, footer small, .support-email { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
-  .support-email:hover { color: var(--acid); }
+  footer { display: grid; grid-template-columns: 1fr auto auto auto auto; gap: 28px; align-items: center; min-height: 114px; }
+  footer p, footer small, .support-email, .footer-link { color: var(--muted); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; }
+  .support-email:hover, .footer-link:hover { color: var(--acid); }
   @media (max-width: 820px) {
     .shell, .site-header { width: min(100% - 30px, 680px); }
     nav > a:not(.nav-button) { display: none; }
