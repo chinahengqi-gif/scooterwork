@@ -1,22 +1,22 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620">
   <defs>
     <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
-      <stop stop-color="#dfff48"/>
-      <stop offset="1" stop-color="#82ae00"/>
+      <stop stop-color="#ff7a1a"/>
+      <stop offset="1" stop-color="#c94c00"/>
     </linearGradient>
     <filter id="s"><feDropShadow dx="0" dy="24" stdDeviation="16" flood-opacity=".25"/></filter>
   </defs>
   <rect width="900" height="620" rx="42" fill="#1b2020"/>
   <path d="M50 500C253 420 517 420 850 494" fill="none" stroke="#333b3a" stroke-width="2"/>
   <circle cx="676" cy="474" r="75" fill="#111515" stroke="#edf1e5" stroke-width="17"/>
-  <circle cx="676" cy="474" r="30" fill="#dfff48"/>
+  <circle cx="676" cy="474" r="30" fill="#ff7a1a"/>
   <circle cx="254" cy="474" r="75" fill="#111515" stroke="#edf1e5" stroke-width="17"/>
-  <circle cx="254" cy="474" r="30" fill="#dfff48"/>
+  <circle cx="254" cy="474" r="30" fill="#ff7a1a"/>
   <g filter="url(#s)">
     <path d="M257 422h330c38 0 73 18 91 52" fill="none" stroke="url(#g)" stroke-width="28" stroke-linecap="round"/>
     <path d="M591 422 540 162h84l53 312" fill="none" stroke="#e8ede3" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M536 159h134" fill="none" stroke="#dfff48" stroke-width="25" stroke-linecap="round"/>
+    <path d="M536 159h134" fill="none" stroke="#ff7a1a" stroke-width="25" stroke-linecap="round"/>
     <path d="M307 422h252l-25 42H285z" fill="#e8ede3"/>
   </g>
-  <text x="64" y="96" fill="#dfff48" font-size="26" font-family="Arial, sans-serif" letter-spacing="8">SCOOTER.WORK</text>
+  <text x="64" y="96" fill="#ff7a1a" font-size="26" font-family="Arial, sans-serif" letter-spacing="8">SCOOTER.WORK</text>
 </svg>
