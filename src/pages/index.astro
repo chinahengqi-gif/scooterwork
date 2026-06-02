@@ -195,11 +195,11 @@ const stores = [
   h2 span { color: var(--acid); }
   .intro div p { max-width: 720px; margin-top: 22px; color: var(--muted); font-size: 16px; line-height: 1.8; }
   .products { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding-bottom: 125px; }
-  .product-card { overflow: hidden; background: var(--panel); border: 1px solid var(--line); transition: border-color 180ms ease; }
+  .product-card { display: flex; overflow: hidden; flex-direction: column; background: var(--panel); border: 1px solid var(--line); transition: border-color 180ms ease; }
   .product-card:hover { border-color: rgba(255, 122, 26, 0.45); }
   .product-image { overflow: hidden; }
   .product-image img { display: block; width: 100%; }
-  .product-copy { padding: 24px; background: var(--acid); color: #fff; }
+  .product-copy { flex: 1; padding: 24px; background: var(--acid); color: #fff; }
   h3 { font-size: 22px; letter-spacing: -0.7px; }
   .product-copy > span { display: block; margin-top: 12px; color: rgba(255, 255, 255, 0.82); font-size: 14px; line-height: 1.7; }
   .stores { padding: 112px 0 125px; background: #e6ebdf; color: var(--dark); }
