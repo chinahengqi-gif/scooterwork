@@ -73,9 +73,22 @@ const stores = [
             Replacement lithium batteries, anti-theft alarms, JOYOR-compatible steering dampers
             and speed unlock kits for compatible electric scooters.
           </p>
-          <div class="hero-actions">
-            <a class="button button-primary" href="#products">Browse products <span>↓</span></a>
-            <button class="button button-primary contact-trigger" type="button" aria-haspopup="dialog" aria-controls="contact-dialog">Contact us <span>↗</span></button>
+          <div class="hero-contact" aria-label="Contact us">
+            <div class="contact-options">
+              <a href="mailto:support@scooter.work">
+                <span>Email</span>
+                <strong>support@scooter.work</strong>
+              </a>
+              <a href="https://wa.me/447873353246" target="_blank" rel="noreferrer">
+                <span>WhatsApp ↗</span>
+                <strong>+44 7873 353246</strong>
+              </a>
+            </div>
+            <p class="contact-note">
+              We usually reply within one business day. WhatsApp may occasionally be unreliable.
+              If you haven't received a reply within 24 hours, please email us at
+              <a href="mailto:support@scooter.work">support@scooter.work</a>.
+            </p>
           </div>
         </div>
       </section>
@@ -133,47 +146,8 @@ const stores = [
       <small>© {new Date().getFullYear()} SCOOTER.WORK</small>
     </footer>
 
-    <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-title" aria-describedby="contact-description" closedby="any">
-      <form method="dialog" class="contact-header">
-        <h2 id="contact-title">Contact us</h2>
-        <button class="contact-close" type="submit" aria-label="Close contact details" autofocus>×</button>
-      </form>
-      <p id="contact-description">We usually reply within one business day.</p>
-      <div class="contact-options">
-        <a href="mailto:support@scooter.work">
-          <span>Email</span>
-          <strong>support@scooter.work</strong>
-        </a>
-        <a href="https://wa.me/447873353246" target="_blank" rel="noreferrer">
-          <span>WhatsApp ↗</span>
-          <strong>+44 7873 353246</strong>
-        </a>
-      </div>
-    </dialog>
   </body>
 </html>
-
-<script>
-  const contactDialog = document.querySelector<HTMLDialogElement>("#contact-dialog");
-  const contactTrigger = document.querySelector<HTMLButtonElement>(".contact-trigger");
-
-  if (contactDialog && contactTrigger) {
-    contactTrigger.addEventListener("click", () => contactDialog.showModal());
-
-    if (!("closedBy" in HTMLDialogElement.prototype)) {
-      contactDialog.addEventListener("click", (event) => {
-        if (event.target !== contactDialog) return;
-        const bounds = contactDialog.getBoundingClientRect();
-        if (
-          event.clientX < bounds.left || event.clientX > bounds.right ||
-          event.clientY < bounds.top || event.clientY > bounds.bottom
-        ) {
-          contactDialog.close();
-        }
-      });
-    }
-  }
-</script>
 
 <style>
   @font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
@@ -225,35 +199,15 @@ const stores = [
   h1 { max-width: 1100px; margin-top: 22px; font-size: clamp(57px, 6.3vw, 92px); line-height: 0.96; letter-spacing: -4px; }
   h1 em { color: var(--acid); font-style: normal; }
   .hero-text { max-width: 620px; margin: 28px 0 0; color: var(--muted); font-size: 16px; line-height: 1.8; }
-  .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 16px; margin-top: 35px; }
-  .button { display: inline-flex; align-items: center; gap: 20px; padding: 16px 18px; border: 0; color: var(--dark); background: var(--acid); font-family: inherit; font-size: 13px; font-weight: 800; line-height: 1.5; cursor: pointer; }
-  .button:hover { background: #ffb36f; }
-  .contact-dialog { width: min(480px, calc(100% - 30px)); max-height: calc(100dvh - 40px); padding: 28px; border: 1px solid var(--line); background: var(--panel); color: var(--text); }
-  .contact-dialog::backdrop { background: rgba(0, 0, 0, 0.75); }
-  .contact-dialog[open] { animation: contact-reveal 240ms cubic-bezier(0.2, 0.8, 0.2, 1); }
-  .contact-dialog[open]::backdrop { animation: contact-backdrop-reveal 240ms ease-out; }
-  @keyframes contact-reveal {
-    from { opacity: 0; transform: translateY(16px) scale(0.96); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-  }
-  @keyframes contact-backdrop-reveal {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .contact-dialog[open], .contact-dialog[open]::backdrop { animation: none; }
-  }
-  .contact-header { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-  .contact-header h2 { font-size: clamp(26px, 6vw, 34px); letter-spacing: -1px; }
-  .contact-close { flex-shrink: 0; width: 44px; height: 44px; border: 1px solid var(--line); background: transparent; color: var(--text); font-size: 28px; cursor: pointer; }
-  .contact-close:hover { color: var(--acid); border-color: var(--acid); }
-  .contact-dialog > p { margin: 18px 0 24px; color: var(--muted); line-height: 1.7; }
-  .contact-options { display: grid; gap: 12px; }
-  .contact-options a { display: grid; gap: 8px; padding: 18px; border: 1px solid var(--line); overflow-wrap: anywhere; }
-  .contact-options a:hover { border-color: var(--acid); }
+  .hero-contact { width: min(100%, 620px); margin-top: 35px; }
+  .contact-options { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px 40px; }
+  .contact-options a { display: grid; gap: 8px; padding: 8px 0; min-width: 0; overflow-wrap: anywhere; }
+  .contact-options a:hover strong { text-decoration: underline; text-underline-offset: 4px; }
   .contact-options span { color: var(--muted); font-size: 12px; letter-spacing: 1px; text-transform: uppercase; }
   .contact-options strong { color: var(--acid); font-size: 16px; }
-  .contact-trigger:focus-visible, .contact-close:focus-visible, .contact-options a:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
+  .contact-note { margin: 20px 0 0; color: var(--muted); font-size: 13px; line-height: 1.8; }
+  .contact-note a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+  .contact-options a:focus-visible, .contact-note a:focus-visible { outline: 2px solid var(--acid); outline-offset: 4px; }
   .intro { padding: 115px 0 50px; border-top: 1px solid var(--line); }
   h2 { font-size: clamp(39px, 5vw, 67px); line-height: 1; letter-spacing: -2px; }
   h2 span { color: var(--acid); }
