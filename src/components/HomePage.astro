@@ -29,7 +29,7 @@ const products = [
   ...product,
   ...copy.productDetails[index],
   guideUrl: `https://guides.scooter.work${localizedPath(locale, `products/${["battery", "alarm", "damper", "speed-kit", "scooter-trailer"][index]}/`)}`,
-}));
+})).filter((_, index) => index !== 0);
 
 const stores = [
   {
@@ -113,7 +113,7 @@ const stores = [
         </div>
       </section>
 
-      <section class="products shell" id="products">
+      <section class="products shell" id="products" data-locale={locale}>
         {products.map((product) => (
           <article class="product-card">
             <div class="product-image">
@@ -159,6 +159,41 @@ const stores = [
 
   </body>
 </html>
+
+<script>
+  const grid = document.querySelector<HTMLElement>("#products");
+  const prototype = grid?.querySelector<HTMLElement>(".product-card")?.cloneNode(true) as HTMLElement | undefined;
+  if (grid && prototype) {
+    const locale = grid.dataset.locale || "en";
+    fetch(`https://guides.scooter.work/api/product-categories?locale=${encodeURIComponent(locale)}`)
+      .then(response => {
+        if (!response.ok) throw new Error("Categories unavailable");
+        return response.json();
+      })
+      .then(payload => {
+        if (!Array.isArray(payload.products)) throw new Error("Invalid categories");
+        const cards = payload.products.map((product: Record<string, unknown>) => {
+          if (typeof product.slug !== "string" || !product.slug || typeof product.name !== "string" || typeof product.description !== "string" || typeof product.image !== "string" || typeof product.alt !== "string") throw new Error("Invalid category");
+          const imageUrl = product.image ? new URL(product.image) : null;
+          if (imageUrl && imageUrl.protocol !== "https:") throw new Error("Invalid image");
+          const card = prototype.cloneNode(true) as HTMLElement;
+          card.querySelector("h3")!.textContent = product.name;
+          card.querySelector(".product-copy > span")!.textContent = product.description;
+          const image = card.querySelector("img")!;
+          if (imageUrl) image.src = imageUrl.href;
+          else image.removeAttribute("src");
+          image.alt = product.alt;
+          image.hidden = !imageUrl;
+          image.loading = "lazy";
+          const prefix = locale === "en" ? "" : `/${locale}`;
+          card.querySelector<HTMLAnchorElement>(".product-guide")!.href = `https://guides.scooter.work${prefix}/products/${encodeURIComponent(product.slug)}/`;
+          return card;
+        });
+        grid.replaceChildren(...cards);
+      })
+      .catch(() => {});
+  }
+</script>
 
 <style>
   @font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
@@ -222,15 +257,18 @@ const stores = [
   h2 { font-size: clamp(2rem, 1rem + 4vw, 4.2rem); line-height: 1.1; letter-spacing: -0.03em; overflow-wrap: anywhere; }
   h2 span { color: var(--acid); }
   .intro div p { max-width: 720px; margin-top: 22px; color: var(--muted); font-size: 16px; line-height: 1.8; }
-  .products { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 15px; padding-bottom: 125px; }
+  .products { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 15px; padding-bottom: 125px; }
   .product-card { display: flex; overflow: hidden; flex-direction: column; background: var(--panel); border: 1px solid var(--line); transition: border-color 180ms ease; }
   .product-card:hover { border-color: rgba(255, 122, 26, 0.45); }
   .product-image { overflow: hidden; aspect-ratio: 1; background: #fff; }
   .product-image img { display: block; width: 100%; height: 100%; object-fit: contain; }
-  .product-copy { flex: 1; padding: 24px; background: var(--acid); color: #fff; }
+  .product-copy { display: flex; flex-direction: column; align-items: flex-start; flex: 1; padding: 24px; background: var(--acid); color: #fff; }
   h3 { font-size: 22px; letter-spacing: -0.7px; overflow-wrap: anywhere; }
   .product-copy > span { display: block; margin-top: 12px; color: rgba(255, 255, 255, 0.82); font-size: 14px; line-height: 1.7; }
-  .product-guide { display: inline-block; margin-top: 20px; color: var(--dark); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
+  .product-guide { display: inline-flex; justify-content: center; align-items: center; min-height: 44px; margin-top: 24px; padding: 12px 16px; border: 2px solid var(--dark); background: var(--dark); color: var(--text); font-size: 13px; font-weight: 700; text-decoration: none; transition: background 180ms ease, color 180ms ease; }
+  .product-guide:hover { background: transparent; color: var(--dark); }
+  .product-guide:focus-visible { outline: 2px solid var(--dark); outline-offset: 4px; }
+  .product-copy > span { flex: 1; }
   .stores { padding: 112px 0 125px; background: #e6ebdf; color: var(--dark); }
   .stores h2 { margin: 0 0 38px; }
   .store-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }

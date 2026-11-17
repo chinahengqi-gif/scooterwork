@@ -9,11 +9,9 @@ npm install
 npm run dev
 ```
 
-## Replace product images
+## Product cards
 
-The current SVG files in `public/images/` are placeholders. Replace them with your own images and
-update the paths in `src/pages/index.astro` if you use different filenames. Recommended image ratio:
-`720 × 520` for product images and `900 × 620` for the hero image.
+Manage product names, descriptions, white-background images, order and visibility in EmDash's **Product categories** collection. Published changes are loaded by the homepage without a rebuild. See `cms/README.md` for translations and article assignments. Static fallback cards live in `src/components/HomePage.astro`.
 
 ## External store links
 

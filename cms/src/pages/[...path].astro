@@ -1,8 +1,9 @@
 ---
-import { getEmDashCollection, getEmDashEntry } from "emdash";
+import { getEmDashEntry } from "emdash";
 import { PortableText } from "emdash/ui";
 import LanguageSwitcher from "../../../src/components/LanguageSwitcher.astro";
-import { translations, localizedPath, type Locale } from "../../../src/i18n";
+import { localizedPath, type Locale } from "../../../src/i18n";
+import { productCategories } from "../lib/product-categories";
 
 const segments = (Astro.params.path || "").split("/").filter(Boolean);
 const locale: Locale = segments[0] === "de" || segments[0] === "fr" ? segments.shift() as Locale : "en";
@@ -11,9 +12,9 @@ const labels = {
   de: { title: "Produktanleitungen", intro: "Montage, Einrichtung und praktische Hilfe für Ihre Scooter-Teile.", home: "Zur Hauptwebsite", all: "Alle Produkte", empty: "Für dieses Produkt wurden noch keine Anleitungen veröffentlicht. Kontaktieren Sie uns, wenn Sie Hilfe benötigen.", error: "Die Anleitungen sind vorübergehend nicht verfügbar. Bitte versuchen Sie es später erneut.", articles: "Anleitungen & Tutorials", video: "Videoanleitung" },
   fr: { title: "Guides produits", intro: "Installation, réglages et assistance pour les pièces de votre trottinette.", home: "Site principal", all: "Tous les produits", empty: "Aucun guide n’a encore été publié pour ce produit. Contactez-nous si vous avez besoin d’aide.", error: "Les guides sont temporairement indisponibles. Veuillez réessayer plus tard.", articles: "Guides et tutoriels", video: "Tutoriel vidéo" },
 }[locale];
-const productSlugs = ["battery", "alarm", "damper", "speed-kit", "scooter-trailer"];
-const images = ["battery.jpg", "alarm.jpg", "damper.webp", "speed-kit.webp", "scooter-trailer.jpg"];
-const products = productSlugs.map((slug, index) => ({ slug, image: images[index], ...translations[locale].productDetails[index] }));
+let products: Awaited<ReturnType<typeof productCategories>> = [];
+try { products = await productCategories(locale); }
+catch { return new Response(labels.error, { status: 503 }); }
 const isArticle = segments[0] === "articles" && segments.length === 2;
 const isProduct = segments[0] === "products" && segments.length === 2;
 const product = isProduct ? products.find(item => item.slug === segments[1]) : undefined;
@@ -27,8 +28,8 @@ if (isArticle) {
   article = result.entry;
   if (!article) return new Response("Not found", { status: 404 });
 } else if (isProduct) {
-  const result = await getEmDashCollection("guides", { locale, where: { product: product!.slug }, orderBy: { published_at: "desc" }, limit: 100 });
-  entries = result.entries;
+  const result = await getEmDashEntry("product_categories", product!.slug, { locale, references: { guides: { limit: 100 } } });
+  entries = result.entry?.references?.guides?.entries || [];
   failed = Boolean(result.error);
   if (failed) Astro.response.status = 503;
 }
@@ -62,13 +63,14 @@ const video = safeMedia(article?.data.video_url);
       {!article && <p class="intro">{product?.description || labels.intro}</p>}
       {!segments.length && <div class="product-grid">{products.map(item => (
         <a class="product" href={localizedPath(locale, `products/${item.slug}/`)}>
-          <img src={`/images/${item.image}`} alt={item.alt} width="400" height="400" loading="lazy" />
+          {item.image && <img src={item.image} alt={item.alt} width="400" height="400" loading="lazy" />}
           <h2>{item.name} <span>↗</span></h2>
+          <p>{item.description}</p>
         </a>
       ))}</div>}
       {isProduct && <section class="articles">
         {failed ? <p>{labels.error}</p> : entries.length ? entries.map(entry => (
-          <a class="article-card" href={localizedPath(locale, `articles/${entry.data.slug || entry.id.split("/").pop()}/`)}>
+          <a class="article-card" href={localizedPath(locale, `articles/${encodeURIComponent(String(entry.data.slug || entry.id.split("/").pop()))}/`)}>
             <h2>{entry.data.title} <span>↗</span></h2><p>{entry.data.summary}</p>
           </a>
         )) : <p>{labels.empty}</p>}

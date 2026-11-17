@@ -4,7 +4,34 @@
   "defaultLocale": "en",
   "meta": { "name": "Scooter.work product guides", "description": "Installation, setup and support articles by product." },
   "settings": { "title": "Scooter.work Guides", "url": "https://guides.scooter.work", "timezone": "Europe/London" },
+  "relations": [{
+    "slug": "guide_categories",
+    "parentCollection": "guides",
+    "childCollection": "product_categories",
+    "parentLabel": "Guides",
+    "parentLabelSingular": "Guide",
+    "childLabel": "Product categories",
+    "childLabelSingular": "Product category",
+    "maxChildrenPerParent": 1
+  }],
   "collections": [{
+    "slug": "product_categories",
+    "label": "Product categories",
+    "labelSingular": "Product category",
+    "description": "Controls the product cards on the homepage and the guides directory. Publish changes to make them live.",
+    "sortOrder": 0,
+    "supports": ["drafts", "revisions"],
+    "urlPattern": "/products/{slug}/",
+    "fields": [
+      { "slug": "title", "label": "Product name", "type": "string", "required": true },
+      { "slug": "description", "label": "Card description", "type": "text" },
+      { "slug": "image", "label": "Product image (white background)", "type": "image", "translatable": false },
+      { "slug": "image_alt", "label": "Image description", "type": "string" },
+      { "slug": "sort_order", "label": "Display order (smaller numbers first)", "type": "number", "defaultValue": 100, "indexed": true, "translatable": false },
+      { "slug": "enabled", "label": "Show on website", "type": "boolean", "defaultValue": true, "indexed": true, "translatable": false },
+      { "slug": "guides", "label": "Guides", "type": "reference", "translatable": false, "validation": { "relation": "guide_categories" } }
+    ]
+  }, {
     "slug": "guides",
     "label": "Product guides",
     "labelSingular": "Guide",
@@ -12,7 +39,7 @@
     "urlPattern": "/articles/{slug}/",
     "fields": [
       { "slug": "title", "label": "Title", "type": "string", "required": true },
-      { "slug": "product", "label": "Product category", "type": "select", "required": true, "indexed": true, "translatable": false, "validation": { "options": ["battery", "alarm", "damper", "speed-kit", "scooter-trailer"] } },
+      { "slug": "category", "label": "Product category", "type": "reference", "required": true, "translatable": false, "validation": { "relation": "guide_categories" } },
       { "slug": "summary", "label": "Short description", "type": "text" },
       { "slug": "content", "label": "Article (add text, pictures and video blocks)", "type": "portableText" },
       { "slug": "video_url", "label": "R2 video URL (optional; MP4 H.264/AAC)", "type": "url", "translatable": false },
