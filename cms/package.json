@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node ../scripts/package-cms.mjs",
-    "deploy": "cf deploy --prebuilt"
+    "deploy": "cf deploy --prebuilt --secrets-file .dev.vars"
   },
   "emdash": { "seed": "seed/seed.json" }
 }
