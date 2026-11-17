@@ -2,3 +2,16 @@ node_modules
 dist
 .astro
 .DS_Store
+.env
+.env.*
+!.env.example
+.dev.vars
+.cloudflare
+.wrangler
+cms/dist
+cms/.astro
+cms/.env
+cms/.dev.vars
+cms/.emdash
+cms/emdash-env.d.ts
+cms-access.txt

@@ -25,7 +25,11 @@ const products = [
   {
     image: "/images/scooter-trailer.jpg",
   },
-].map((product, index) => ({ ...product, ...copy.productDetails[index] }));
+].map((product, index) => ({
+  ...product,
+  ...copy.productDetails[index],
+  guideUrl: `https://guides.scooter.work${localizedPath(locale, `products/${["battery", "alarm", "damper", "speed-kit", "scooter-trailer"][index]}/`)}`,
+}));
 
 const stores = [
   {
@@ -71,6 +75,7 @@ const stores = [
       </a>
       <nav aria-label={copy.navigation}>
         <a href="#products">{copy.products}</a>
+        <a href={`https://guides.scooter.work${localizedPath(locale)}`}>{copy.guidesLink}</a>
         <a class="nav-button" href="#stores">{copy.exploreStores} <span>↗</span></a>
         <LanguageSwitcher locale={locale} />
       </nav>
@@ -117,6 +122,7 @@ const stores = [
             <div class="product-copy">
               <h3>{product.name}</h3>
               <span>{product.description}</span>
+              <a class="product-guide" href={product.guideUrl}>{copy.guidesLink} ↗</a>
             </div>
           </article>
         ))}
@@ -224,6 +230,7 @@ const stores = [
   .product-copy { flex: 1; padding: 24px; background: var(--acid); color: #fff; }
   h3 { font-size: 22px; letter-spacing: -0.7px; overflow-wrap: anywhere; }
   .product-copy > span { display: block; margin-top: 12px; color: rgba(255, 255, 255, 0.82); font-size: 14px; line-height: 1.7; }
+  .product-guide { display: inline-block; margin-top: 20px; color: var(--dark); font-size: 13px; font-weight: 700; text-decoration: underline; text-underline-offset: 4px; }
   .stores { padding: 112px 0 125px; background: #e6ebdf; color: var(--dark); }
   .stores h2 { margin: 0 0 38px; }
   .store-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }

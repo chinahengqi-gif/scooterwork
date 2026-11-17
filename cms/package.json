@@ -1,0 +1,11 @@
+{
+  "name": "scooterwork-guides",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node ../scripts/package-cms.mjs",
+    "deploy": "cf deploy --prebuilt"
+  },
+  "emdash": { "seed": "seed/seed.json" }
+}
