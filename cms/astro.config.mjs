@@ -20,6 +20,15 @@ export default defineConfig({
   adapter: cloudflare({ configPath: fileURLToPath(adapterConfig), imageService: "passthrough" }),
   i18n: { defaultLocale: "en", locales: ["en", "de", "fr"], routing: { prefixDefaultLocale: false } },
   integrations: [
+    {
+      name: "scooterwork-large-video-routes",
+      hooks: {
+        "astro:config:setup": ({ injectRoute }) => injectRoute({
+          pattern: "/_emdash/api/large-videos/[...path]",
+          entrypoint: fileURLToPath(new URL("./src/large-videos/endpoint.ts", import.meta.url)),
+        }),
+      },
+    },
     react(),
     emdash({
       database: d1({ binding: "DB" }),
@@ -29,6 +38,14 @@ export default defineConfig({
       fonts: false,
       toolbar: false,
       maxUploadSize: 90 * 1024 * 1024,
+      plugins: [{
+        id: "large-videos",
+        version: "1.0.0",
+        entrypoint: fileURLToPath(new URL("./src/large-videos/plugin.ts", import.meta.url)),
+        options: { adminEntry: fileURLToPath(new URL("./src/large-videos/admin.tsx", import.meta.url)) },
+        adminEntry: fileURLToPath(new URL("./src/large-videos/admin.tsx", import.meta.url)),
+        adminPages: [{ path: "/upload", label: "大视频上传", icon: "upload-simple" }],
+      }],
       admin: { locales: ["en", "de", "fr"] },
       middleware: { outer: new URL("./src/admin-gate.ts", import.meta.url) },
     }),

@@ -14,7 +14,17 @@ The original marketing site remains on Cloudflare Pages. This app runs on a sepa
 4. Add text, images and video blocks. Upload MP4 videos (H.264/AAC) to the media library, or enter an existing `https://media.scooter.work/...` video URL.
 5. Use the translations panel for English, German and French. Save and publish; public pages read published content at request time, without a rebuild.
 
-CMS uploads are limited to 90 MiB to stay below the proxied request limit. For larger videos, upload directly to the R2 bucket using Cloudflare's dashboard or S3 tools, then paste the media URL into the article. Prepare videos with MP4 fast-start for prompt playback. No Stream service is used.
+The standard media uploader is limited to 90 MiB to stay below the proxied request limit. For larger videos use the **大视频上传** page described below. You can still upload externally using S3 tools, but those files are not automatically registered in the media library. Prepare videos with MP4 fast-start for prompt playback. No Stream service is used.
+
+## Large video uploads
+
+Open **大视频上传** in the admin sidebar (or `/_emdash/admin/plugins/large-videos/upload`). Select an original MP4 or WebM file and start uploading. This separate entry supports files up to 20 GiB using 16 MiB R2 multipart requests; the normal 90 MiB uploader is unchanged. No S3 access keys or additional server are needed.
+
+Keep the page open while uploading. Failed parts retry automatically up to three times. Pause before switching pages. Progress is stored in the CMS for 24 hours; after a refresh, browser restart or network failure, return using the same browser and select the same original file to continue. A local fingerprint checks that you selected the original file. Closing/reloading does not automatically resume uploading until you select the file again. Do not edit or rename the source file during an upload.
+
+After completion, the video is registered in the EmDash media library. In an article's Portable Text editor choose **+ → Video**, select it from the library and insert it. Multiple video blocks can be placed among the text. The upload page also provides the public video URL. R2 serves the original bytes, not a transcoded version; use MP4 H.264/AAC with fast-start for broad playback compatibility.
+
+Cancel removes unfinished parts and any unregistered object. The existing minute cron cleans up expired unfinished uploads and retains completed upload receipts for seven days; deleting a receipt never deletes its published video. Videos already in the media library must be deleted through the normal media-management flow. All upload operations require an authenticated EmDash user with `media:upload`, CSRF verification and upload ownership, in addition to the existing HTTP access gate.
 
 ## Manage product cards and categories
 
