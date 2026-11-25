@@ -106,14 +106,14 @@ const english = {
       "We operate self-run independent stores as our primary channel across Europe, North America, and Australia, alongside AliExpress, Amazon, and other platforms.",
     points: [
       {
-        title: "Shopify Storefront Extensions",
+        title: "Custom Shopify Themes & App Development",
         detail:
-          "Deployment and integration of tailored Shopify storefront tools, including Germany warehouse stock display, store dashboards, bulk discounts, order export, and catalog workflows.",
+          "In-house development of custom storefront themes, Shopify Apps, and extensions beyond native platform limits—such as live inventory display, bulk discounts, operations dashboards, and catalog management to drive storefront conversion and back-office precision.",
       },
       {
-        title: "Operations Productivity Tools",
+        title: "In-House Multi-Store & Automation Tools",
         detail:
-          "Workflow tools for multi-store order CSV logistics reconciliation (YunExpress, SF International) and batch AI translation for Shopify Translate & Adapt.",
+          "Custom-built order and shipping cost reconciliation exporters alongside batch AI translation workflows tailored for multi-store, multilingual operations, eliminating manual reconciliation and accelerating multi-market launches.",
       },
     ],
     trophyAlt: "Official Shopify achievement milestone trophy",
@@ -268,14 +268,14 @@ const chinese: typeof english = {
       "公司以自营独立站为核心渠道，覆盖欧洲、北美和澳洲市场，同时布局速卖通、亚马逊等第三方平台，形成独立站为主、平台渠道为辅的跨境销售网络。",
     points: [
       {
-        title: "Shopify 店铺扩展应用部署",
+        title: "Shopify 模板与专属应用开发",
         detail:
-          "具备定制化 Shopify 店铺扩展的部署与集成能力，支持德国仓库存显示、店铺看板、批量折扣、订单导出及商品目录管理。",
+          "可根据业务需求自主开发主题模板、Shopify App 及扩展插件，打破平台原生功能限制。例如实时库存显示、批量折扣、经营看板及商品目录管理，直接服务于前台转化与后台精细化运营。",
       },
       {
-        title: "跨境运营效率工具",
+        title: "自研多店提效与自动化工具",
         detail:
-          "搭建多商店订单与物流费导出工具（支持云途、顺丰国际）及 Shopify 批量 AI 翻译流程，提升多语种店铺运营效率。",
+          "针对多店铺、多语种的日常痛点，自研订单与物流费核算导出工具及批量 AI 翻译工作流，省去繁琐的人工对账与逐条翻译，大幅加快新品出海与多市场铺货节奏。",
       },
     ],
     trophyAlt: "来自 Shopify 官方的成就纪念碑",
