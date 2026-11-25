@@ -1,0 +1,71 @@
+---
+import { localizedPath, translations, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+  page?: string;
+}
+
+const { locale, page = "" } = Astro.props;
+const options: { code: Locale; label: string; lang: string }[] = [
+  { code: "zh", label: "中文", lang: "zh-CN" },
+  { code: "en", label: "EN", lang: "en" },
+];
+---
+
+<div class="lang-switch" role="group" aria-label={translations[locale].nav.languageLabel}>
+  {options.map((opt) => (
+    <a
+      href={localizedPath(opt.code, page)}
+      lang={opt.lang}
+      hreflang={opt.code === "zh" ? "zh-Hans" : opt.code}
+      data-locale={opt.code}
+      class:list={["lang-item", { active: opt.code === locale }]}
+      aria-current={opt.code === locale ? "page" : undefined}
+    >
+      {opt.label}
+    </a>
+  ))}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>(".lang-switch a[data-locale]").forEach((link) => {
+    link.addEventListener("click", () => {
+      try {
+        localStorage.setItem("about-scooterwork-language", link.dataset.locale!);
+      } catch {}
+    });
+  });
+</script>
+
+<style>
+  .lang-switch {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    border-radius: 2px;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .lang-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 30px;
+    padding: 0 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #b7c0bc;
+    transition: background 150ms ease, color 150ms ease;
+  }
+  .lang-item + .lang-item {
+    border-left: 1px solid rgba(255, 255, 255, 0.16);
+  }
+  .lang-item:hover {
+    color: #ffffff;
+  }
+  .lang-item.active {
+    background: #ff7a1a;
+    color: #111515;
+  }
+</style>

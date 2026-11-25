@@ -1,0 +1,156 @@
+---
+import { localizedPath, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const copy = {
+  en: { title: "Recent articles", loading: "Loading articles…", empty: "No articles have been published yet.", error: "Could not load articles.", previous: "Previous", next: "Next", page: "Page", pagination: "Article pages", browse: "Browse all guides" },
+  de: { title: "Neueste Artikel", loading: "Artikel werden geladen …", empty: "Es wurden noch keine Artikel veröffentlicht.", error: "Die Artikel konnten nicht geladen werden.", previous: "Zurück", next: "Weiter", page: "Seite", pagination: "Artikelseiten", browse: "Alle Anleitungen ansehen" },
+  fr: { title: "Articles récents", loading: "Chargement des articles…", empty: "Aucun article n’a encore été publié.", error: "Impossible de charger les articles.", previous: "Précédente", next: "Suivante", page: "Page", pagination: "Pages d’articles", browse: "Voir tous les guides" },
+}[locale];
+---
+
+<section class="recent-articles" aria-labelledby="recent-articles-title" data-locale={locale} data-copy={JSON.stringify(copy)}>
+  <h2 id="recent-articles-title" tabindex="-1">{copy.title}</h2>
+  <p class="status" role="status"></p>
+  <noscript><a href={`https://guides.scooter.work${localizedPath(locale)}`}>{copy.browse}</a></noscript>
+  <ul class="article-list"></ul>
+  <nav aria-label={copy.pagination} hidden>
+    <button type="button" class="previous">{copy.previous}</button>
+    <span class="page" aria-live="polite"></span>
+    <button type="button" class="next">{copy.next}</button>
+  </nav>
+</section>
+
+<script>
+  const section = document.querySelector<HTMLElement>(".recent-articles");
+
+  if (section) {
+    const origin = "https://guides.scooter.work";
+    const locale = section.dataset.locale || "en";
+    const copy = JSON.parse(section.dataset.copy!);
+    const heading = section.querySelector("h2")!;
+    const list = section.querySelector("ul")!;
+    const status = section.querySelector<HTMLElement>(".status")!;
+    const pager = section.querySelector("nav")!;
+    const pageLabel = section.querySelector<HTMLElement>(".page")!;
+    const previous = section.querySelector<HTMLButtonElement>(".previous")!;
+    const next = section.querySelector<HTMLButtonElement>(".next")!;
+    const dateFormat = new Intl.DateTimeFormat(locale, { dateStyle: "medium", timeZone: "UTC" });
+    let page = 1;
+    let feedLocale = locale;
+    let hasMore = false;
+    let loading = false;
+
+    async function load(target: number) {
+      if (loading) return;
+      loading = true;
+      status.textContent = copy.loading;
+      list.setAttribute("aria-busy", "true");
+      try {
+        const query = new URLSearchParams({ locale: feedLocale, page: String(target) });
+        const response = await fetch(`${origin}/api/recent-articles?${query}`);
+        if (!response.ok) throw new Error(copy.error);
+        const result = await response.json();
+        const rows = result.articles.map((article: { title: string; summary: string; path: string; publishedAt: string | null }) => {
+          const row = document.createElement("li");
+          const link = document.createElement("a");
+          link.href = origin + article.path;
+          const title = document.createElement("h3");
+          title.textContent = article.title;
+          link.append(title);
+          if (article.summary) {
+            const summary = document.createElement("p");
+            summary.textContent = article.summary;
+            link.append(summary);
+          }
+          const date = article.publishedAt ? new Date(article.publishedAt) : null;
+          if (date && !Number.isNaN(date.getTime())) {
+            const time = document.createElement("time");
+            time.dateTime = date.toISOString();
+            time.textContent = dateFormat.format(date);
+            link.append(time);
+          }
+          row.append(link);
+          return row;
+        });
+        const changedPage = target !== page;
+        page = target;
+        feedLocale = result.locale;
+        hasMore = result.hasMore;
+        list.lang = feedLocale;
+        list.replaceChildren(...rows);
+        status.textContent = rows.length ? "" : copy.empty;
+        pageLabel.textContent = `${copy.page} ${page}`;
+        pager.hidden = page === 1 && !hasMore;
+        previous.disabled = page === 1;
+        next.disabled = !hasMore;
+        if (changedPage) heading.focus();
+      } catch {
+        status.textContent = copy.error;
+      } finally {
+        list.removeAttribute("aria-busy");
+        loading = false;
+      }
+    }
+
+    previous.addEventListener("click", () => { if (page > 1) void load(page - 1); });
+    next.addEventListener("click", () => { if (hasMore) void load(page + 1); });
+    void load(1);
+  }
+</script>
+
+<style>
+  .recent-articles { padding: 56px 0 64px; border-top: 1px solid #eaedf2; }
+  h2 { margin: 0 0 22px; font-size: clamp(1.5rem, 1.1rem + 1.4vw, 2.1rem); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; color: #111418; }
+  .article-list { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .article-list :global(a) {
+    display: grid;
+    gap: 6px;
+    padding: 18px 22px;
+    border: 1px solid #eaedf2;
+    border-radius: 0;
+    background: #ffffff;
+    color: #111418;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+    transition: border-color 150ms ease;
+  }
+  .article-list :global(a:hover) { border-color: rgba(245, 102, 0, 0.55); }
+  .article-list :global(a:hover h3) { color: #f56600; }
+  .article-list :global(h3) { margin: 0; font-size: 16.5px; font-weight: 700; color: #111418; transition: color 150ms ease; }
+  .article-list :global(p) { margin: 0; color: #5c646d; font-size: 14px; line-height: 1.6; }
+  .article-list :global(time), .status { color: #7b848e; font-size: 13px; line-height: 1.5; }
+  .status:empty { display: none; }
+  nav:not([hidden]) { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 22px; }
+  .page { font-size: 13.5px; font-weight: 500; color: #5c646d; }
+  button {
+    min-height: 40px;
+    padding: 8px 16px;
+    border: 1px solid #dce1e7;
+    border-radius: 0;
+    background: #ffffff;
+    color: #111418;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+  }
+  button:hover:not(:disabled) { border-color: #f56600; color: #f56600; background: #fff4ec; }
+  button:disabled { opacity: 0.45; cursor: default; }
+  button:focus-visible, .article-list :global(a:focus-visible) { outline: 2px solid #f56600; outline-offset: 2px; }
+  noscript a {
+    display: inline-block;
+    padding: 10px 16px;
+    border: 1px solid #dce1e7;
+    border-radius: 0;
+    color: #111418;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+</style>

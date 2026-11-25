@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { productCategories } from "../../lib/product-categories";
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, locals }) => {
   const requested = url.searchParams.get("locale");
   const locale = requested === "de" || requested === "fr" ? requested : "en";
   const headers = {
@@ -11,7 +11,7 @@ export const GET: APIRoute = async ({ url }) => {
     "X-Content-Type-Options": "nosniff",
   };
   try {
-    return new Response(JSON.stringify({ products: await productCategories(locale) }), { headers });
+    return new Response(JSON.stringify({ products: await productCategories(locale, locals.emdash?.getPublicMediaUrl) }), { headers });
   } catch {
     return new Response(JSON.stringify({ error: "Product categories unavailable" }), { status: 503, headers });
   }

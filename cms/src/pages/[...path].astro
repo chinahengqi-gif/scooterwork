@@ -13,7 +13,7 @@ const labels = {
   fr: { title: "Guides produits", intro: "Installation, réglages et assistance pour les pièces de votre trottinette.", home: "Site principal", all: "Tous les produits", empty: "Aucun guide n’a encore été publié pour ce produit. Contactez-nous si vous avez besoin d’aide.", error: "Les guides sont temporairement indisponibles. Veuillez réessayer plus tard.", articles: "Guides et tutoriels", video: "Tutoriel vidéo" },
 }[locale];
 let products: Awaited<ReturnType<typeof productCategories>> = [];
-try { products = await productCategories(locale); }
+try { products = await productCategories(locale, Astro.locals.emdash?.getPublicMediaUrl); }
 catch { return new Response(labels.error, { status: 503 }); }
 const isArticle = segments[0] === "articles" && segments.length === 2;
 const isProduct = segments[0] === "products" && segments.length === 2;
@@ -50,11 +50,14 @@ const video = safeMedia(article?.data.video_url);
     <title>{title} — Scooter.work</title>
     <meta name="description" content={article?.data.summary || product?.description || labels.intro} />
     <link rel="canonical" href={new URL(localizedPath(locale, page), Astro.site)} />
-    <link rel="icon" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+    <link rel="apple-touch-icon" href="/logo.png" />
   </head>
   <body>
     <header class="shell">
-      <a class="brand" href={`https://scooter.work${localizedPath(locale)}`}>SCOOTER<span>.WORK</span></a>
+      <a class="brand" href={`https://scooter.work${localizedPath(locale)}`}>
+        <img class="brand-logo" src="/logo.png" alt="Scooter.work" width="34" height="34" />
+      </a>
       <nav><a href={localizedPath(locale)}>{labels.all}</a><LanguageSwitcher locale={locale} page={page} /></nav>
     </header>
     <main class="shell">
@@ -98,8 +101,9 @@ const video = safeMedia(article?.data.video_url);
   .shell { width: min(1200px, calc(100% - 32px)); margin-inline: auto; }
   header, nav, footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
   header { min-height: 88px; padding-block: 18px; border-bottom: 1px solid var(--line); }
-  .brand { font-family: "Archivo Black", sans-serif; letter-spacing: 2px; }
-  .brand span, .eyebrow, h2 span { color: var(--acid); }
+  .brand { display: inline-flex; align-items: center; gap: 10px; font-family: "Archivo Black", sans-serif; letter-spacing: 2px; }
+  .brand-logo { display: block; width: 34px; height: 34px; flex-shrink: 0; }
+  .brand > span > span, .eyebrow, h2 span { color: var(--acid); }
   main { padding-block: 64px; min-height: 65dvh; }
   h1 { font-family: "Archivo Black", sans-serif; font-size: clamp(2rem, 1rem + 4vw, 4rem); line-height: 1.15; overflow-wrap: anywhere; }
   .intro, .contact, footer { color: var(--muted); }
