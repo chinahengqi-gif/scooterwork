@@ -115,6 +115,7 @@ const year = new Date().getFullYear();
 
             <div class="overview-org">
               <h3>{copy.overview.departmentsTitle}</h3>
+              <p class="overview-lead">{copy.overview.intro}</p>
               <dl class="dept-table">
                 {copy.overview.departments.map((dept) => (
                   <div class="dept-row">
@@ -591,70 +592,83 @@ const year = new Date().getFullYear();
   /* OVERVIEW */
   .overview-grid {
     display: grid;
-    grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 28px;
+    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+    gap: 0;
     align-items: stretch;
-  }
-  .overview-photo {
-    display: flex;
-    flex-direction: column;
-    border: 1px solid var(--border);
+    border: 1px solid #d9dee5;
     background: var(--gray-bg);
   }
+  .overview-photo {
+    position: relative;
+    margin: 0;
+    background: #14171a;
+    overflow: hidden;
+  }
   .overview-photo img {
+    display: block;
     width: 100%;
-    flex: 1;
-    min-height: 0;
-    aspect-ratio: 16 / 9;
+    height: 100%;
+    min-height: 320px;
     object-fit: cover;
   }
   .overview-photo figcaption {
-    padding: 10px 14px;
+    position: absolute;
+    inset: auto 0 0;
+    padding: 10px 16px;
     font-size: 13px;
-    color: var(--ink-muted);
-    border-top: 1px solid var(--border);
-    background: var(--white);
+    color: var(--white);
+    background: rgba(17, 20, 24, 0.72);
   }
   .overview-org {
     display: flex;
     flex-direction: column;
-    padding: 26px 28px;
+    justify-content: center;
+    padding: 28px 30px;
     background: var(--gray-bg);
-    border: 1px solid var(--border);
-    border-radius: 0;
+    border-left: 1px solid #d9dee5;
   }
   .overview-org h3 {
     font-size: 17px;
     font-weight: 700;
-    margin-bottom: 14px;
+    margin-bottom: 10px;
     color: var(--ink);
   }
+  .overview-lead {
+    font-size: 14px;
+    color: var(--ink-muted);
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
   .dept-table {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border-top: 2px solid var(--ink);
+    border: 1px solid #d9dee5;
+    background: var(--white);
   }
   .dept-row {
     display: grid;
     grid-template-columns: 112px minmax(0, 1fr);
-    gap: 16px;
-    padding: 15px 0;
-    border-bottom: 1px solid var(--border);
-    align-items: baseline;
+    border-bottom: 1px solid #e4e7ec;
   }
   .dept-row:last-child {
     border-bottom: 0;
-    padding-bottom: 0;
   }
   .dept-row dt {
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
+    background: #eef1f5;
+    border-right: 1px solid #e4e7ec;
+    font-size: 13.5px;
     font-weight: 700;
     color: var(--ink);
   }
   .dept-row dd {
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
+    background: var(--white);
     color: var(--ink-muted);
-    font-size: 14.5px;
+    font-size: 13.5px;
+    line-height: 1.55;
   }
 
   /* BRANDS */
@@ -967,11 +981,22 @@ const year = new Date().getFullYear();
   }
   @media (max-width: 960px) {
     .hero-grid,
-    .overview-grid,
     .ops-split,
     .contact-grid {
       grid-template-columns: 1fr;
       gap: 32px;
+    }
+    .overview-grid {
+      grid-template-columns: 1fr;
+    }
+    .overview-photo img {
+      min-height: 0;
+      aspect-ratio: 16 / 9;
+    }
+    .overview-org {
+      border-left: 0;
+      border-top: 1px solid #d9dee5;
+      padding: 24px 20px;
     }
     .partner-grid,
     .photo-grid,
@@ -1019,7 +1044,14 @@ const year = new Date().getFullYear();
     }
     .dept-row {
       grid-template-columns: 1fr;
-      gap: 4px;
+    }
+    .dept-row dt {
+      border-right: 0;
+      border-bottom: 1px solid #e4e7ec;
+      padding: 9px 12px;
+    }
+    .dept-row dd {
+      padding: 10px 12px;
     }
     .channel-row {
       grid-template-columns: 1fr auto;
