@@ -135,28 +135,29 @@ const copy = {
     flex-direction: column;
     height: 100%;
     padding: 0;
-    border: 1px solid #c2c9d4;
+    border: 1px solid #e1e1e1;
     border-radius: 0;
     background: #ffffff;
     color: #111418;
     text-decoration: none;
     overflow-wrap: anywhere;
     cursor: pointer;
-    transition: border-color 150ms ease;
   }
-  .article-list :global(a:hover) { border-color: #f56600; }
   .article-list :global(a:hover h3) { color: #f56600; }
   .article-list :global(.article-cover) {
     aspect-ratio: 16 / 9;
     overflow: hidden;
     background: #f7f8fa;
-    border-bottom: 1px solid #e4e8ee;
   }
   .article-list :global(.article-cover img) {
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 260ms ease;
+  }
+  .article-list :global(a:hover .article-cover img) {
+    transform: scale(1.04);
   }
   .article-list :global(.article-body) {
     display: flex;
