@@ -1,10 +1,11 @@
+import { env } from "cloudflare:workers";
 import { getEmDashCollection } from "emdash";
-import { sql, type Kysely } from "kysely";
 import type { Locale } from "../../../src/i18n";
 
 type ResolveMediaUrl = (storageKey: string) => string;
 
 const INTERNAL_MEDIA_PREFIX = "/_emdash/api/media/file/";
+const VIDEO_PATH_RE = /\.(mp4|webm|mov|m4v|ogv)$/i;
 const SQL_CHUNK_SIZE = 80;
 
 function safeHttpsUrl(value: unknown, base?: string): string {
@@ -15,6 +16,12 @@ function safeHttpsUrl(value: unknown, base?: string): string {
   } catch {
     return "";
   }
+}
+
+function safeImageUrl(value: unknown): string {
+  const url = safeHttpsUrl(value);
+  if (!url) return "";
+  return VIDEO_PATH_RE.test(new URL(url).pathname) ? "" : url;
 }
 
 export function resolveSeoImageUrl(raw: unknown, resolveMediaUrl?: ResolveMediaUrl): string {
@@ -39,24 +46,22 @@ export function resolveSeoImageUrl(raw: unknown, resolveMediaUrl?: ResolveMediaU
 }
 
 async function queryGuideSeoImages(
-  db: unknown,
   contentIds: string[],
   resolveMediaUrl?: ResolveMediaUrl,
 ): Promise<Map<string, string>> {
   const map = new Map<string, string>();
-  if (!db || !contentIds.length) return map;
-  const kyselyDb = db as Kysely<Record<string, never>>;
+  const d1 = (env as unknown as { DB?: D1Database }).DB;
+  if (!d1 || !contentIds.length) return map;
   const uniqueIds = [...new Set(contentIds)];
 
   for (let index = 0; index < uniqueIds.length; index += SQL_CHUNK_SIZE) {
     const chunk = uniqueIds.slice(index, index + SQL_CHUNK_SIZE);
-    const { rows } = await sql<{ content_id: string; seo_image: string | null }>`
-      SELECT content_id, seo_image
-      FROM _emdash_seo
-      WHERE collection = 'guides'
-        AND content_id IN (${sql.join(chunk)})
-    `.execute(kyselyDb);
-    for (const row of rows) {
+    const placeholders = chunk.map(() => "?").join(", ");
+    const { results } = await d1
+      .prepare(`SELECT content_id, seo_image FROM _emdash_seo WHERE collection = 'guides' AND content_id IN (${placeholders})`)
+      .bind(...chunk)
+      .all<{ content_id: string; seo_image: string | null }>();
+    for (const row of results ?? []) {
       const resolved = resolveSeoImageUrl(row.seo_image, resolveMediaUrl);
       if (resolved) map.set(row.content_id, resolved);
     }
@@ -68,14 +73,14 @@ export async function guideCovers(
   entries: ReadonlyArray<{ data: Record<string, unknown> }>,
   options: { db?: unknown; locale: Locale; resolveMediaUrl?: ResolveMediaUrl },
 ): Promise<Map<string, string>> {
-  const { db, locale, resolveMediaUrl } = options;
+  const { locale, resolveMediaUrl } = options;
   const covers = new Map<string, string>();
   if (!entries.length) return covers;
 
   const ids = entries
     .map((entry) => entry.data.id)
     .filter((id): id is string => typeof id === "string" && id.length > 0);
-  const seoImages = await queryGuideSeoImages(db, ids, resolveMediaUrl);
+  const seoImages = await queryGuideSeoImages(ids, resolveMediaUrl);
 
   const missingGroups: Array<{ id: string; group: string }> = [];
   for (const entry of entries) {
@@ -108,7 +113,7 @@ export async function guideCovers(
       const matchedEnIds = missingGroups
         .map(({ group }) => enByGroup.get(group)?.id)
         .filter((id): id is string => typeof id === "string" && id.length > 0);
-      const enSeoImages = await queryGuideSeoImages(db, matchedEnIds, resolveMediaUrl);
+      const enSeoImages = await queryGuideSeoImages(matchedEnIds, resolveMediaUrl);
 
       for (const { id, group } of missingGroups) {
         const sibling = enByGroup.get(group);
@@ -118,7 +123,7 @@ export async function guideCovers(
         const fallbackImage =
           (siblingId ? enSeoImages.get(siblingId) : "") ||
           resolveSeoImageUrl(siblingSeo, resolveMediaUrl) ||
-          safeHttpsUrl(sibling.poster_url);
+          safeImageUrl(sibling.poster_url);
         if (fallbackImage) covers.set(id, fallbackImage);
       }
     }
@@ -127,7 +132,7 @@ export async function guideCovers(
   for (const entry of entries) {
     const id = typeof entry.data.id === "string" ? entry.data.id : "";
     if (!id || covers.has(id)) continue;
-    covers.set(id, safeHttpsUrl(entry.data.poster_url));
+    covers.set(id, safeImageUrl(entry.data.poster_url));
   }
 
   return covers;
