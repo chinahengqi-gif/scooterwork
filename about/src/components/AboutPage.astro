@@ -226,8 +226,49 @@ const year = new Date().getFullYear();
           <div class="coop-grid">
             {copy.partnership.models.map((model) => (
               <article class="coop-card">
-                <h3>{model.title}</h3>
-                <p>{model.detail}</p>
+                <div class="coop-head">
+                  <div class="coop-id-wrap">
+                    <span class="coop-code">{model.code}</span>
+                    <span class="coop-tag">{model.tag}</span>
+                  </div>
+                  <div class="coop-icon" aria-hidden="true">
+                    {model.icon === "agency" && (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M12 3l8 3.5v5.5c0 4.7-3.4 8-8 9-4.6-1-8-4.3-8-9V6.5L12 3z" />
+                        <path d="M9 12l2 2 4-4" />
+                      </svg>
+                    )}
+                    {model.icon === "distribution" && (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter">
+                        <rect x="3" y="3" width="6" height="6" />
+                        <rect x="15" y="3" width="6" height="6" />
+                        <rect x="9" y="15" width="6" height="6" />
+                        <path d="M9 6h6M6 9v3h12V9M12 12v3" />
+                      </svg>
+                    )}
+                    {model.icon === "operations" && (
+                      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M12 2.5L20 7v10l-8 4.5L4 17V7l8-4.5z" />
+                        <path d="M4 7l8 4.5L20 7M12 11.5v10" />
+                      </svg>
+                    )}
+                  </div>
+                </div>
+
+                <div class="coop-body">
+                  <h3>{model.title}</h3>
+                  <p class="coop-summary">{model.detail}</p>
+                  <ul class="coop-list">
+                    {model.highlights.map((item) => (
+                      <li>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div class="coop-foot">
+                  <span class="coop-meta-label">{model.metaLabel}</span>
+                  <span class="coop-meta-val">{model.metaValue}</span>
+                </div>
               </article>
             ))}
           </div>
@@ -808,22 +849,134 @@ const year = new Date().getFullYear();
     gap: 20px;
   }
   .coop-card {
-    padding: 28px;
-    background: var(--gray-soft);
+    display: flex;
+    flex-direction: column;
+    background: var(--white);
     border: 1px solid var(--border);
-    border-top: 3px solid var(--orange);
     border-radius: 0;
+    transition: border-color 150ms ease;
   }
-  .coop-card h3 {
-    font-size: 18px;
+  .coop-card:hover {
+    border-color: var(--orange);
+  }
+  .coop-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 16px 24px;
+    background: var(--gray-soft);
+    border-top: 3px solid var(--ink);
+    border-bottom: 1px solid var(--border);
+    transition: border-top-color 150ms ease, background 150ms ease;
+  }
+  .coop-card:hover .coop-head {
+    border-top-color: var(--orange);
+    background: #fffaf6;
+  }
+  .coop-id-wrap {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+  }
+  .coop-code {
+    font-size: 22px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+    color: var(--orange);
+  }
+  .coop-tag {
+    padding-left: 12px;
+    border-left: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    line-height: 1.3;
+  }
+  .coop-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 0;
+    color: var(--ink);
+    transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  }
+  .coop-card:hover .coop-icon {
+    background: #fff4ec;
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+  .coop-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 24px 20px;
+  }
+  .coop-body h3 {
+    font-size: 20px;
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    letter-spacing: -0.015em;
   }
-  .coop-card p {
-    font-size: 14.5px;
+  .coop-summary {
+    font-size: 14px;
     color: var(--ink-muted);
-    line-height: 1.75;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+  .coop-list {
+    margin-top: auto;
+    padding-top: 16px;
+    border-top: 1px solid #eceff3;
+    list-style: none;
+    display: grid;
+    gap: 9px;
+  }
+  .coop-list li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  .coop-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 6px;
+    height: 6px;
+    background: var(--orange);
+  }
+  .coop-foot {
+    padding: 12px 24px;
+    background: var(--gray-soft);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 12.5px;
+  }
+  .coop-meta-label {
+    color: var(--ink-muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .coop-meta-val {
+    color: var(--ink);
+    font-weight: 700;
+    text-align: right;
   }
 
   /* CONTACT */
