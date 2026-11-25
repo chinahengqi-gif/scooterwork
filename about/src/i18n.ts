@@ -38,18 +38,26 @@ const english = {
       "Founded in 2024 in Linping, Hangzhou, we are a cross-border e-commerce company focused on electric scooters. Our 12-person team covers visual design, independent store operations, warehousing, logistics, and after-sales service.",
     primaryCta: "Business Inquiries",
     secondaryCta: "Visit scooter.work",
-    signAlt: "Hangzhou Scooter Technology Co., Ltd. company signage",
+    gallery: [
+      {
+        src: "/images/company/sign-wide.jpg",
+        alt: "Hangzhou Scooter Technology Co., Ltd. company signage",
+        label: "Company Signage",
+      },
+      {
+        src: "/images/company/office-team.jpg",
+        alt: "Hangzhou office and operations team with electric scooters",
+        label: "Hangzhou Office",
+      },
+    ],
+    prevPhoto: "Previous photo",
+    nextPhoto: "Next photo",
     facts: [
       { value: "2024", label: "Founded" },
       { value: "Hangzhou", label: "Location" },
       { value: "12", label: "Team Size" },
       { value: "EU · NA · AU", label: "Core markets" },
     ],
-  },
-  overview: {
-    title: "Company Overview",
-    intro:
-      "Backed by our Hangzhou Linping headquarters, our team focuses on self-operated independent stores alongside AliExpress, Amazon, and major marketplaces—coordinating visual merchandising, overseas warehouse fulfillment, cross-border logistics, and local spare-parts support across Europe, North America, and Australia.",
   },
   brands: {
     partnersTitle: "Our Online Stores",
@@ -193,18 +201,26 @@ const chinese: typeof english = {
       "杭州斯古特科技有限公司成立于 2024 年，总部位于杭州临平。公司团队 12 人，设有运营部、售后部、物流部和视觉设计部，形成了从视觉设计、独立站运营到仓储物流与售后服务的完整出海链路。",
     primaryCta: "联系合作",
     secondaryCta: "访问 scooter.work",
-    signAlt: "杭州斯古特科技有限公司企业铭牌",
+    gallery: [
+      {
+        src: "/images/company/sign-wide.jpg",
+        alt: "杭州斯古特科技有限公司企业铭牌",
+        label: "企业铭牌",
+      },
+      {
+        src: "/images/company/office-team.jpg",
+        alt: "杭州斯古特科技有限公司办公区实景",
+        label: "办公区实景",
+      },
+    ],
+    prevPhoto: "上一张",
+    nextPhoto: "下一张",
     facts: [
       { value: "2024 年", label: "成立时间" },
       { value: "杭州临平", label: "公司位于" },
       { value: "12 人", label: "员工人数" },
       { value: "欧洲 · 北美 · 澳洲", label: "覆盖市场" },
     ],
-  },
-  overview: {
-    title: "公司概况",
-    intro:
-      "依托杭州临平总部的协同团队，公司以欧美及澳洲自营独立站为核心，结合速卖通、亚马逊等跨境平台渠道，统筹视觉呈现、海外仓储履约、跨境物流与本地售后备件支持，为合作品牌和终端骑行用户提供稳定可靠的出海运营支撑。",
   },
   brands: {
     partnersTitle: "我们的在线商店",
