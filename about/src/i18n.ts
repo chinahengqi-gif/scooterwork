@@ -135,45 +135,21 @@ const english = {
     models: [
       {
         code: "01",
-        icon: "agency" as const,
-        tag: "Market Authorization",
         title: "Brand Agency",
-        detail: "Regional agency sales and brand promotion across Europe, North America, and Australia.",
-        highlights: [
-          "Dedicated brand storefront & localized visual design",
-          "Market expansion across Europe, North America & Australia",
-          "Launch campaigns and regional brand positioning",
-        ],
-        metaLabel: "Target Markets",
-        metaValue: "EU · NA · AU",
+        detail:
+          "Regional agency sales and brand promotion across Europe, North America, and Australia, covering dedicated storefronts, localized visual design, and market expansion.",
       },
       {
         code: "02",
-        icon: "distribution" as const,
-        tag: "Multi-Channel Rollout",
         title: "Product Distribution",
-        detail: "Fast rollout through our self-operated independent stores, AliExpress, Amazon, and more.",
-        highlights: [
-          "Self-operated DTC stores for scooters & spare parts",
-          "Marketplace coverage on AliExpress, Amazon & more",
-          "Multilingual catalog & multi-store inventory sync",
-        ],
-        metaLabel: "Sales Network",
-        metaValue: "DTC + Marketplaces",
+        detail:
+          "Fast rollout across our self-operated DTC stores, AliExpress, Amazon, and major marketplaces with multilingual catalogs and multi-store inventory sync.",
       },
       {
         code: "03",
-        icon: "operations" as const,
-        tag: "Full-Lifecycle Support",
         title: "End-to-End Operations",
-        detail: "One-stop support covering warehousing, local after-sales, advertising, and content.",
-        highlights: [
-          "Overseas warehousing & cross-border fulfillment",
-          "Local after-sales service, spare parts & repair guides",
-          "Performance advertising & content marketing growth",
-        ],
-        metaLabel: "Backed By",
-        metaValue: "Ops · Design · Logistics · Support",
+        detail:
+          "One-stop execution covering overseas warehousing, cross-border fulfillment, local after-sales parts and service, performance advertising, and content marketing.",
       },
     ],
   },
@@ -321,45 +297,21 @@ const chinese: typeof english = {
     models: [
       {
         code: "01",
-        icon: "agency" as const,
-        tag: "区域授权 · 品牌建设",
         title: "品牌代理",
-        detail: "承接品牌在欧洲、北美、澳洲市场的代理销售与推广。",
-        highlights: [
-          "品牌独立站搭建与本地化视觉呈现",
-          "欧洲、北美及澳洲重点市场深度拓展",
-          "新品推广企划与区域品牌声量建设",
-        ],
-        metaLabel: "覆盖市场",
-        metaValue: "欧洲 · 北美 · 澳洲",
+        detail:
+          "承接品牌在欧洲、北美及澳洲市场的代理销售与推广，覆盖独立站搭建、本地化视觉呈现与区域市场拓展。",
       },
       {
         code: "02",
-        icon: "distribution" as const,
-        tag: "多渠道 · 快速铺货",
         title: "产品分销",
-        detail: "依托自营独立站及速卖通、亚马逊等平台渠道快速铺货。",
-        highlights: [
-          "自营垂类独立站精准承接整车与配件流量",
-          "速卖通、亚马逊等主流跨境平台协同分销",
-          "多语种商品目录与多店铺折扣库存同步",
-        ],
-        metaLabel: "销售网络",
-        metaValue: "独立站 + 主流平台",
+        detail:
+          "依托自营垂类独立站与速卖通、亚马逊等主流跨境平台快速铺货，支持多语种商品目录与多店铺库存同步。",
       },
       {
         code: "03",
-        icon: "operations" as const,
-        tag: "仓储物流 · 营销售后",
         title: "全链路承接",
-        detail: "仓储物流、本地售后、广告投放与内容营销一站式支持。",
-        highlights: [
-          "海外仓储履约与跨境头程 / 尾程物流对接",
-          "本地售后维修、备件支持与图文视频指导",
-          "海外广告投放与社媒内容营销持续放量",
-        ],
-        metaLabel: "团队支撑",
-        metaValue: "运营 · 设计 · 物流 · 售后",
+        detail:
+          "提供海外仓储履约、跨境物流对接、本地售后维修与备件支持，并配套海外广告投放与内容营销服务。",
       },
     ],
   },
