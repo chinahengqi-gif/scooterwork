@@ -592,15 +592,19 @@ const year = new Date().getFullYear();
   .overview-grid {
     display: grid;
     grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-    gap: 44px;
-    align-items: start;
+    gap: 28px;
+    align-items: stretch;
   }
   .overview-photo {
+    display: flex;
+    flex-direction: column;
     border: 1px solid var(--border);
     background: var(--gray-bg);
   }
   .overview-photo img {
     width: 100%;
+    flex: 1;
+    min-height: 0;
     aspect-ratio: 16 / 9;
     object-fit: cover;
   }
@@ -611,22 +615,38 @@ const year = new Date().getFullYear();
     border-top: 1px solid var(--border);
     background: var(--white);
   }
+  .overview-org {
+    display: flex;
+    flex-direction: column;
+    padding: 26px 28px;
+    background: var(--gray-bg);
+    border: 1px solid var(--border);
+    border-radius: 0;
+  }
   .overview-org h3 {
     font-size: 17px;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     color: var(--ink);
   }
   .dept-table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     border-top: 2px solid var(--ink);
   }
   .dept-row {
     display: grid;
-    grid-template-columns: 140px minmax(0, 1fr);
+    grid-template-columns: 112px minmax(0, 1fr);
     gap: 16px;
-    padding: 16px 0;
+    padding: 15px 0;
     border-bottom: 1px solid var(--border);
     align-items: baseline;
+  }
+  .dept-row:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
   }
   .dept-row dt {
     font-weight: 700;

@@ -41,8 +41,8 @@ const english = {
     signAlt: "Hangzhou Scooter Technology Co., Ltd. company signage",
     facts: [
       { value: "2024", label: "Founded" },
-      { value: "Hangzhou", label: "Linping HQ" },
-      { value: "12", label: "Team across 4 divisions" },
+      { value: "Hangzhou", label: "Location" },
+      { value: "12", label: "Team Size" },
       { value: "EU · NA · AU", label: "Core markets" },
     ],
   },
@@ -203,8 +203,8 @@ const chinese: typeof english = {
     signAlt: "杭州斯古特科技有限公司企业铭牌",
     facts: [
       { value: "2024 年", label: "成立时间" },
-      { value: "杭州临平", label: "公司总部" },
-      { value: "12 人", label: "运营 · 售后 · 物流 · 视觉设计" },
+      { value: "杭州临平", label: "公司位于" },
+      { value: "12 人", label: "员工人数" },
       { value: "欧洲 · 北美 · 澳洲", label: "覆盖市场" },
     ],
   },
