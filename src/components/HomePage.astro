@@ -1,7 +1,8 @@
 ---
-import LanguageSwitcher from "./LanguageSwitcher.astro";
 import LocaleHead from "./LocaleHead.astro";
 import RecentArticles from "./RecentArticles.astro";
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
 import { localizedPath, translations, type Locale } from "../i18n";
 
 interface Props {
@@ -72,40 +73,7 @@ const stores = [
   </head>
   <body>
     <div class="hero-stage">
-      <header class="site-header shell">
-        <a class="brand brand--light" href={localizedPath(locale)} aria-label={copy.home}>
-          <img class="brand-logo" src="/logo.png" alt="Scooter.work" width="34" height="34" />
-        </a>
-
-        <nav class="main-nav" aria-label={copy.navigation}>
-          <a class="nav-pill" href={localizedPath(locale)} aria-current="page">{copy.navHome}</a>
-          <a href="#products">{copy.navProducts}</a>
-          <a href={`https://guides.scooter.work${localizedPath(locale)}`}>{copy.guidesLink}</a>
-        </nav>
-
-        <a class="header-whatsapp" href="https://wa.me/447873353246" target="_blank" rel="noreferrer">
-          <span class="wa-text">
-            <small>WhatsApp</small>
-            <strong>+44 7873 353246</strong>
-          </span>
-          <svg viewBox="0 0 1024 1024" width="22" height="22" aria-hidden="true">
-            <path d="M713.5 599.9c-10.9-5.6-65.2-32.2-75.3-35.8-10.1-3.8-17.5-5.6-24.8 5.6-7.4 11.1-28.4 35.8-35 43.3-6.4 7.4-12.9 8.3-23.8 2.8-64.8-32.4-107.3-57.8-150-131.1-11.3-19.5 11.3-18.1 32.4-60.2 3.6-7.4 1.8-13.7-1-19.3-2.8-5.6-24.8-59.8-34-81.9-8.9-21.5-18.1-18.5-24.8-18.9-6.4-0.4-13.7-0.4-21.1-0.4-7.4 0-19.3 2.8-29.4 13.7-10.1 11.1-38.6 37.8-38.6 92s39.5 106.7 44.9 114.1c5.6 7.4 77.7 118.6 188.4 166.5 70 30.2 97.4 32.8 132.4 27.6 21.3-3.2 65.2-26.6 74.3-52.5 9.1-25.8 9.1-47.9 6.4-52.5-2.7-4.9-10.1-7.7-21-13z" fill="currentColor" />
-            <path d="M925.2 338.4c-22.6-53.7-55-101.9-96.3-143.3-41.3-41.3-89.5-73.8-143.3-96.3C630.6 75.7 572.2 64 512 64h-2c-60.6 0.3-119.3 12.3-174.5 35.9-53.3 22.8-101.1 55.2-142 96.5-40.9 41.3-73 89.3-95.2 142.8-23 55.4-34.6 114.3-34.3 174.9 0.3 69.4 16.9 138.3 48 199.9v152c0 25.4 20.6 46 46 46h152.1c61.6 31.1 130.5 47.7 199.9 48h2.1c59.9 0 118-11.6 172.7-34.3 53.5-22.3 101.6-54.3 142.8-95.2 41.3-40.9 73.8-88.7 96.5-142 23.6-55.2 35.6-113.9 35.9-174.5 0.3-60.9-11.5-120-34.8-175.6z m-151.1 438C704 845.8 611 884 512 884h-1.7c-60.3-0.3-120.2-15.3-173.1-43.5l-8.4-4.5H188V695.2l-4.5-8.4C155.3 633.9 140.3 574 140 513.7c-0.4-99.7 37.7-193.3 107.6-263.8 69.8-70.5 163.1-109.5 262.8-109.9h1.7c50 0 98.5 9.7 144.2 28.9 44.6 18.7 84.6 45.6 119 80 34.3 34.3 61.3 74.4 80 119 19.4 46.2 29.1 95.2 28.9 145.8-0.6 99.6-39.7 192.9-110.1 262.7z" fill="currentColor" />
-          </svg>
-        </a>
-
-        <div class="header-actions">
-          <LanguageSwitcher locale={locale} variant="overlay" />
-          <a class="store-cta" href="#stores">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="9" cy="20" r="1.5" />
-              <circle cx="17" cy="20" r="1.5" />
-              <path d="M3 4h2l2.4 10.5a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.2L21 7H6" />
-            </svg>
-            <span>{copy.navStores}</span>
-          </a>
-        </div>
-      </header>
+      <SiteHeader locale={locale} active="home" variant="overlay" />
 
       <section class="hero shell" aria-label={copy.contact}>
         <div class="hero-copy">
@@ -175,18 +143,7 @@ const stores = [
       </section>
     </main>
 
-    <footer class="site-footer">
-      <div class="shell footer-inner">
-        <a class="brand brand--dark" href={localizedPath(locale)} aria-label={copy.home}>
-          <img class="brand-logo" src="/logo.png" alt="Scooter.work" width="34" height="34" />
-        </a>
-        <p>{copy.footerText}</p>
-        <a class="footer-link" href="mailto:support@scooter.work">support@scooter.work</a>
-        <a class="footer-link" href="https://wa.me/447873353246" target="_blank" rel="noreferrer">WhatsApp: +44 7873 353246</a>
-        <a class="footer-link" href={localizedPath(locale, "privacy/")}>{copy.privacyLink}</a>
-        <small>© {new Date().getFullYear()} SCOOTER.WORK</small>
-      </div>
-    </footer>
+    <SiteFooter locale={locale} />
 
   </body>
 </html>
@@ -227,7 +184,6 @@ const stores = [
 </script>
 
 <style>
-  @font-face { font-family: "Archivo Black"; src: url("/fonts/archivo-black.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
   @font-face { font-family: "Inter"; src: url("/fonts/inter-400.ttf") format("truetype"); font-style: normal; font-weight: 400; font-display: swap; }
   @font-face { font-family: "Inter"; src: url("/fonts/inter-500.ttf") format("truetype"); font-style: normal; font-weight: 500; font-display: swap; }
   @font-face { font-family: "Inter"; src: url("/fonts/inter-600.ttf") format("truetype"); font-style: normal; font-weight: 600; font-display: swap; }
@@ -272,115 +228,6 @@ const stores = [
     background-size: cover;
     background-position: center 62%;
     color: #ffffff;
-  }
-
-  .site-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    min-height: 78px;
-    padding-block: 14px;
-    position: relative;
-    z-index: 20;
-  }
-  .brand {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-family: "Archivo Black", Impact, sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    letter-spacing: 1.5px;
-    flex-shrink: 0;
-  }
-  .brand-logo {
-    display: block;
-    width: 34px;
-    height: 34px;
-    flex-shrink: 0;
-  }
-  .brand--light { color: #ffffff; }
-  .brand--light span span { color: #ff7a1a; }
-  .brand--dark { color: var(--text); }
-  .brand--dark span span { color: var(--accent); }
-
-  .main-nav {
-    display: flex;
-    align-items: center;
-    gap: 22px;
-    font-size: 14px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.92);
-  }
-  .main-nav a {
-    transition: color 150ms ease, background 150ms ease;
-    white-space: nowrap;
-  }
-  .main-nav a:not(.nav-pill):hover { color: #ff9447; }
-  .nav-pill {
-    padding: 7px 14px;
-    border-radius: 0;
-    background: var(--accent);
-    color: #ffffff;
-  }
-  .nav-pill:hover { background: var(--accent-hover); }
-
-  .header-whatsapp {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: auto;
-    color: rgba(255, 255, 255, 0.94);
-    transition: color 150ms ease;
-    white-space: nowrap;
-  }
-  .header-whatsapp:hover { color: #ff9447; }
-  .wa-text {
-    display: flex;
-    flex-direction: column;
-    line-height: 1.15;
-    text-align: right;
-  }
-  .wa-text small {
-    font-size: 10px;
-    font-weight: 500;
-    color: rgba(255, 255, 255, 0.72);
-  }
-  .wa-text strong {
-    font-size: 12.5px;
-    font-weight: 600;
-  }
-
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-shrink: 0;
-  }
-  .store-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    min-height: 38px;
-    padding: 8px 16px;
-    border-radius: 0;
-    background: var(--accent);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 700;
-    white-space: nowrap;
-    transition: background 150ms ease;
-  }
-  .store-cta:hover { background: var(--accent-hover); }
-  .store-cta:focus-visible,
-  .main-nav a:focus-visible,
-  .header-whatsapp:focus-visible,
-  .hero-btn:focus-visible,
-  .product-guide:focus-visible,
-  .store-card:focus-visible {
-    outline: 2px solid #ffffff;
-    outline-offset: 3px;
   }
 
   .hero {
@@ -444,6 +291,7 @@ const stores = [
   .hero-btn--ghost:hover {
     background: rgba(255, 255, 255, 0.16);
   }
+  .hero-btn:focus-visible { outline: 2px solid #ffffff; outline-offset: 3px; }
 
   /* SUPPORT BAR */
   .support-bar {
@@ -626,49 +474,12 @@ const stores = [
     color: #ffffff;
   }
 
-  /* FOOTER */
-  .site-footer {
-    background: #ffffff;
-    border-top: 1px solid var(--line);
-  }
-  .footer-inner {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 14px 28px;
-    align-items: center;
-    min-height: 92px;
-    padding-block: 24px;
-  }
-  .footer-inner p,
-  .footer-inner small,
-  .footer-link {
-    color: var(--muted);
-    font-size: 12.5px;
-    font-weight: 500;
-  }
-  .footer-inner small { margin-left: auto; }
-  .footer-link:hover { color: var(--accent); }
-
   @media (max-width: 1099px) {
-    .header-whatsapp { display: none; }
     .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   }
 
   @media (max-width: 780px) {
     .shell { width: min(100% - 32px, 680px); }
-    .site-header {
-      flex-wrap: wrap;
-      gap: 12px;
-      padding-block: 14px;
-    }
-    .main-nav {
-      order: 3;
-      width: 100%;
-      flex-wrap: wrap;
-      gap: 10px 18px;
-      padding-top: 8px;
-      border-top: 1px solid rgba(255, 255, 255, 0.18);
-    }
     .hero-stage {
       min-height: 460px;
       background-position: 58% 60%;
@@ -687,11 +498,5 @@ const stores = [
     }
     .stores { padding: 52px 0 60px; }
     .store-grid { grid-template-columns: 1fr; }
-    .footer-inner {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 10px;
-    }
-    .footer-inner small { margin-left: 0; }
   }
 </style>

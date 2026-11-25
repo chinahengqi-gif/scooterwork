@@ -1,0 +1,79 @@
+---
+import { localizedPath, translations, type Locale } from "../i18n";
+
+interface Props {
+  locale: Locale;
+  baseUrl?: string;
+}
+
+const { locale, baseUrl = "" } = Astro.props;
+const copy = translations[locale];
+const homeHref = `${baseUrl}${localizedPath(locale)}`;
+---
+
+<footer class="site-footer">
+  <div class="shell footer-inner">
+    <a class="brand" href={homeHref} aria-label={copy.home}>
+      <img class="brand-logo" src="/logo.png" alt="Scooter.work" width="34" height="34" />
+    </a>
+    <p>{copy.footerText}</p>
+    <a class="footer-link" href={`https://guides.scooter.work${localizedPath(locale)}`}>{copy.guidesLink}</a>
+    <a class="footer-link" href="https://about.scooter.work/">{copy.navAbout}</a>
+    <a class="footer-link" href="mailto:support@scooter.work">support@scooter.work</a>
+    <a class="footer-link" href="https://wa.me/447873353246" target="_blank" rel="noreferrer">WhatsApp: +44 7873 353246</a>
+    <a class="footer-link" href={`${baseUrl}${localizedPath(locale, "privacy/")}`}>{copy.privacyLink}</a>
+    <small>© {new Date().getFullYear()} SCOOTER.WORK</small>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: #ffffff;
+    border-top: 1px solid #e6e9ee;
+  }
+  .shell {
+    width: min(1240px, calc(100% - 48px));
+    margin-inline: auto;
+  }
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    align-items: center;
+    min-height: 92px;
+    padding-block: 24px;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .brand-logo {
+    display: block;
+    width: 34px;
+    height: 34px;
+    flex-shrink: 0;
+  }
+  .footer-inner p,
+  .footer-inner small,
+  .footer-link {
+    margin: 0;
+    color: #5c646d;
+    font-size: 12.5px;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .footer-inner small { margin-left: auto; }
+  .footer-link:hover { color: #f56600; }
+  .footer-link:focus-visible,
+  .brand:focus-visible { outline: 2px solid #f56600; outline-offset: 3px; }
+  @media (max-width: 780px) {
+    .shell { width: min(100% - 32px, 680px); }
+    .footer-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer-inner small { margin-left: 0; }
+  }
+</style>

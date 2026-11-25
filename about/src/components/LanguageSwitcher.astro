@@ -41,31 +41,37 @@ const options: { code: Locale; label: string; lang: string }[] = [
 <style>
   .lang-switch {
     display: inline-flex;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.22);
-    border-radius: 2px;
-    overflow: hidden;
+    align-items: stretch;
+    background: #ffffff;
+    border: 1px solid #dce1e7;
+    border-radius: 0;
     flex-shrink: 0;
   }
   .lang-item {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 30px;
-    padding: 0 10px;
+    min-height: 36px;
+    padding: 0 11px;
     font-size: 12px;
     font-weight: 600;
-    color: #b7c0bc;
+    color: #5c646d;
+    text-decoration: none;
     transition: background 150ms ease, color 150ms ease;
   }
   .lang-item + .lang-item {
-    border-left: 1px solid rgba(255, 255, 255, 0.16);
+    border-left: 1px solid #e6e9ee;
   }
   .lang-item:hover {
-    color: #ffffff;
+    color: #111418;
+    background: #f7f8fa;
   }
   .lang-item.active {
-    background: #ff7a1a;
-    color: #111515;
+    background: #f56600;
+    color: #ffffff;
+  }
+  .lang-item:focus-visible {
+    outline: 2px solid #f56600;
+    outline-offset: 2px;
   }
 </style>
