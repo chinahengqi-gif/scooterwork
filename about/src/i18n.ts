@@ -49,16 +49,7 @@ const english = {
   overview: {
     title: "Company Overview",
     intro:
-      "Led by our Hangzhou headquarters, four cross-functional teams operate across DTC storefronts, visual merchandising, cross-border logistics, and local after-sales support for Europe, North America, and Australia.",
-    photoAlt: "Hangzhou office and operations team with electric scooters",
-    photoCaption: "Hangzhou Linping office and team",
-    departmentsTitle: "Organization & Divisions",
-    departments: [
-      { name: "Operations", detail: "Independent DTC stores and marketplace channels across Europe, North America, and Australia." },
-      { name: "Visual Design", detail: "Brand storefront UI, product visual merchandising, and localized marketing creatives." },
-      { name: "Logistics", detail: "Cross-border freight, overseas warehousing, and order fulfillment." },
-      { name: "After-Sales", detail: "Local customer support, spare parts supply, and technical guides." },
-    ],
+      "Backed by our Hangzhou Linping headquarters, our team focuses on self-operated independent stores alongside AliExpress, Amazon, and major marketplaces—coordinating visual merchandising, overseas warehouse fulfillment, cross-border logistics, and local spare-parts support across Europe, North America, and Australia.",
   },
   brands: {
     partnersTitle: "Our Online Stores",
@@ -213,16 +204,7 @@ const chinese: typeof english = {
   overview: {
     title: "公司概况",
     intro:
-      "依托杭州临平总部的跨职能团队，公司围绕独立站与主流跨境平台开展运营，协同视觉设计、海外仓储物流与本地售后服务体系，服务欧洲、北美及澳洲市场。",
-    photoAlt: "杭州斯古特科技有限公司办公区与电动滑板车",
-    photoCaption: "杭州临平办公区实景",
-    departmentsTitle: "组织架构与职能分工",
-    departments: [
-      { name: "运营部", detail: "负责欧洲、北美、澳洲自营独立站及平台渠道运营。" },
-      { name: "视觉设计部", detail: "负责独立站视觉呈现、产品图文详情及海外营销物料设计。" },
-      { name: "物流部", detail: "负责跨境物流、海外仓储及订单履约。" },
-      { name: "售后部", detail: "负责海外本地售后服务、备件支持与使用指导。" },
-    ],
+      "依托杭州临平总部的协同团队，公司以欧美及澳洲自营独立站为核心，结合速卖通、亚马逊等跨境平台渠道，统筹视觉呈现、海外仓储履约、跨境物流与本地售后备件支持，为合作品牌和终端骑行用户提供稳定可靠的出海运营支撑。",
   },
   brands: {
     partnersTitle: "我们的在线商店",

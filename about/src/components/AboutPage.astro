@@ -100,31 +100,12 @@ const year = new Date().getFullYear();
         </div>
       </div>
 
-      <!-- COMPANY OVERVIEW & ORGANIZATION -->
-      <section class="section section-white" id="overview">
+      <!-- COMPANY OVERVIEW -->
+      <section class="overview-banner" id="overview">
         <div class="container">
-          <div class="section-head">
+          <div class="overview-copy">
             <h2>{copy.overview.title}</h2>
-          </div>
-
-          <div class="overview-grid">
-            <figure class="overview-photo">
-              <img src="/images/company/office-team.jpg" alt={copy.overview.photoAlt} loading="lazy" width="1024" height="575" />
-              <figcaption>{copy.overview.photoCaption}</figcaption>
-            </figure>
-
-            <div class="overview-org">
-              <h3>{copy.overview.departmentsTitle}</h3>
-              <p class="overview-lead">{copy.overview.intro}</p>
-              <dl class="dept-table">
-                {copy.overview.departments.map((dept) => (
-                  <div class="dept-row">
-                    <dt>{dept.name}</dt>
-                    <dd>{dept.detail}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
+            <p>{copy.overview.intro}</p>
           </div>
         </div>
       </section>
@@ -590,85 +571,36 @@ const year = new Date().getFullYear();
   }
 
   /* OVERVIEW */
-  .overview-grid {
-    display: grid;
-    grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
-    gap: 0;
-    align-items: stretch;
-    border: 1px solid #d9dee5;
-    background: var(--gray-bg);
-  }
-  .overview-photo {
+  .overview-banner {
     position: relative;
-    margin: 0;
-    background: #14171a;
-    overflow: hidden;
-  }
-  .overview-photo img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-    object-fit: cover;
-  }
-  .overview-photo figcaption {
-    position: absolute;
-    inset: auto 0 0;
-    padding: 10px 16px;
-    font-size: 13px;
+    display: flex;
+    align-items: center;
+    min-height: clamp(420px, 36vw, 520px);
+    padding: 72px 0;
+    background-color: #14171a;
+    background-image:
+      linear-gradient(90deg, rgba(14, 18, 24, 0.88) 0%, rgba(14, 18, 24, 0.74) 46%, rgba(14, 18, 24, 0.22) 100%),
+      url("/images/company/office-team.jpg");
+    background-size: cover;
+    background-position: center 46%;
     color: var(--white);
-    background: rgba(17, 20, 24, 0.72);
+    scroll-margin-top: 24px;
   }
-  .overview-org {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 28px 30px;
-    background: var(--gray-bg);
-    border-left: 1px solid #d9dee5;
+  .overview-copy {
+    max-width: 600px;
   }
-  .overview-org h3 {
-    font-size: 17px;
+  .overview-copy h2 {
+    font-size: clamp(1.45rem, 1.1rem + 0.9vw, 1.95rem);
     font-weight: 700;
-    margin-bottom: 10px;
-    color: var(--ink);
+    color: var(--white);
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
   }
-  .overview-lead {
-    font-size: 14px;
-    color: var(--ink-muted);
-    line-height: 1.75;
-    margin-bottom: 20px;
-  }
-  .dept-table {
-    border: 1px solid #d9dee5;
-    background: var(--white);
-  }
-  .dept-row {
-    display: grid;
-    grid-template-columns: 112px minmax(0, 1fr);
-    border-bottom: 1px solid #e4e7ec;
-  }
-  .dept-row:last-child {
-    border-bottom: 0;
-  }
-  .dept-row dt {
-    display: flex;
-    align-items: center;
-    padding: 11px 14px;
-    background: #eef1f5;
-    border-right: 1px solid #e4e7ec;
-    font-size: 13.5px;
-    font-weight: 700;
-    color: var(--ink);
-  }
-  .dept-row dd {
-    display: flex;
-    align-items: center;
-    padding: 11px 14px;
-    background: var(--white);
-    color: var(--ink-muted);
-    font-size: 13.5px;
-    line-height: 1.55;
+  .overview-copy p {
+    font-size: 15.5px;
+    line-height: 1.85;
+    color: rgba(255, 255, 255, 0.9);
   }
 
   /* BRANDS */
@@ -986,18 +918,6 @@ const year = new Date().getFullYear();
       grid-template-columns: 1fr;
       gap: 32px;
     }
-    .overview-grid {
-      grid-template-columns: 1fr;
-    }
-    .overview-photo img {
-      min-height: 0;
-      aspect-ratio: 16 / 9;
-    }
-    .overview-org {
-      border-left: 0;
-      border-top: 1px solid #d9dee5;
-      padding: 24px 20px;
-    }
     .partner-grid,
     .photo-grid,
     .coop-grid {
@@ -1042,16 +962,13 @@ const year = new Date().getFullYear();
     .section {
       padding: 52px 0;
     }
-    .dept-row {
-      grid-template-columns: 1fr;
-    }
-    .dept-row dt {
-      border-right: 0;
-      border-bottom: 1px solid #e4e7ec;
-      padding: 9px 12px;
-    }
-    .dept-row dd {
-      padding: 10px 12px;
+    .overview-banner {
+      min-height: 360px;
+      padding: 56px 0;
+      background-image:
+        linear-gradient(180deg, rgba(14, 18, 24, 0.82) 0%, rgba(14, 18, 24, 0.68) 100%),
+        url("/images/company/office-team.jpg");
+      background-position: 62% center;
     }
     .channel-row {
       grid-template-columns: 1fr auto;
