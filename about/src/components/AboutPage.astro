@@ -142,8 +142,8 @@ const year = new Date().getFullYear();
                   <img class={partner.logoClass} src={partner.logo} alt={partner.name} loading="lazy" />
                 </div>
                 <p>{partner.description}</p>
-                <a class="text-link" href={partner.href} target="_blank" rel="noreferrer">
-                  {partner.domain} ↗
+                <a class="btn btn-primary store-btn" href={partner.href} target="_blank" rel="noreferrer">
+                  {partner.domain}
                 </a>
               </article>
             ))}
@@ -159,8 +159,8 @@ const year = new Date().getFullYear();
             </div>
             <div class="own-brand-body">
               <p>{copy.brands.ownBrand.description}</p>
-              <a class="text-link" href={copy.brands.ownBrand.href} target="_blank" rel="noreferrer">
-                {copy.brands.ownBrand.domain} ↗
+              <a class="btn btn-primary store-btn" href={copy.brands.ownBrand.href} target="_blank" rel="noreferrer">
+                {copy.brands.ownBrand.domain}
               </a>
             </div>
           </article>
@@ -677,24 +677,9 @@ const year = new Date().getFullYear();
     color: var(--ink-muted);
     line-height: 1.75;
   }
-  .text-link {
-    display: inline-flex;
-    align-items: center;
+  .store-btn {
     align-self: flex-start;
-    gap: 8px;
-    margin-top: 18px;
-    padding: 9px 16px;
-    border: 1px solid var(--orange);
-    border-radius: 0;
-    background: #fff4ec;
-    color: var(--orange);
-    font-size: 13px;
-    font-weight: 600;
-    transition: background 150ms ease, color 150ms ease;
-  }
-  .text-link:hover {
-    background: var(--orange);
-    color: var(--white);
+    margin-top: 20px;
   }
 
   .own-brand-row {
@@ -722,8 +707,8 @@ const year = new Date().getFullYear();
     color: var(--ink);
     line-height: 1.8;
   }
-  .own-brand-body .text-link {
-    margin-top: 14px;
+  .own-brand-body .store-btn {
+    margin-top: 16px;
   }
 
   /* OPERATIONS */

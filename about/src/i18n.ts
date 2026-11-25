@@ -20,7 +20,7 @@ const english = {
     privacy: "Privacy",
     aboutTag: "Company",
     about: "Overview",
-    brands: "Brands",
+    brands: "Online Stores",
     operations: "Operations",
     facilities: "Warehouse & Service",
     partnership: "Partnership",
@@ -59,7 +59,7 @@ const english = {
     ],
   },
   brands: {
-    partnersTitle: "Our Partners",
+    partnersTitle: "Our Online Stores",
     ownBrandTitle: "Our Brand",
     visitStore: "Visit store",
     partners: [
@@ -182,7 +182,7 @@ const chinese: typeof english = {
     privacy: "隐私政策",
     aboutTag: "公司介绍",
     about: "公司简介",
-    brands: "合作伙伴",
+    brands: "在线商店",
     operations: "跨境运营",
     facilities: "仓库与服务",
     partnership: "合作方式",
@@ -221,7 +221,7 @@ const chinese: typeof english = {
     ],
   },
   brands: {
-    partnersTitle: "我们的合作伙伴",
+    partnersTitle: "我们的在线商店",
     ownBrandTitle: "我们的品牌",
     visitStore: "访问独立站",
     partners: [
