@@ -833,10 +833,9 @@ const year = new Date().getFullYear();
 
   /* CONTACT */
   .section-contact {
-    background: var(--gray-bg);
-    color: var(--ink);
+    background: var(--orange);
+    color: var(--white);
     padding: 64px 0;
-    border-top: 3px solid var(--orange);
     scroll-margin-top: 24px;
   }
   .contact-grid {
@@ -848,18 +847,18 @@ const year = new Date().getFullYear();
   .contact-info h2 {
     font-size: clamp(1.5rem, 1.1rem + 0.9vw, 2rem);
     font-weight: 700;
-    color: var(--ink);
+    color: var(--white);
     margin-bottom: 14px;
   }
   .contact-company {
     font-size: 16px;
     font-weight: 600;
-    color: var(--ink);
+    color: var(--white);
   }
   .contact-address {
     margin-top: 6px;
     font-size: 14px;
-    color: var(--ink-muted);
+    color: rgba(255, 255, 255, 0.88);
   }
   .contact-channels {
     display: grid;
@@ -872,7 +871,6 @@ const year = new Date().getFullYear();
     gap: 16px;
     padding: 18px 20px;
     background: var(--white);
-    border: 1px solid var(--border);
     border-radius: 0;
   }
   .channel-label {
@@ -882,10 +880,11 @@ const year = new Date().getFullYear();
   .channel-val {
     font-size: 17px;
     font-weight: 700;
-    color: var(--orange);
+    color: var(--ink);
     overflow-wrap: anywhere;
   }
   .channel-val:hover {
+    color: var(--orange);
     text-decoration: underline;
     text-underline-offset: 4px;
   }
