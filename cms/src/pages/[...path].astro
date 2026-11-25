@@ -195,18 +195,17 @@ const siteCopy = translations[locale];
     height: 36px;
     padding: 0 14px;
     margin-bottom: 20px;
-    border: 1px solid #d5dae1;
+    border: 1px solid var(--text);
     border-radius: 0;
-    background: var(--surface);
+    background: var(--bg);
     color: var(--text);
     font-size: 13px;
     font-weight: 600;
-    transition: border-color 150ms ease, color 150ms ease, background 150ms ease;
+    transition: border-color 150ms ease, color 150ms ease;
   }
   .back-link:hover {
     border-color: var(--accent);
     color: var(--accent);
-    background: #fff4ec;
   }
   .back-link:focus-visible {
     outline: 2px solid var(--accent);
