@@ -9,7 +9,7 @@ const english = {
   langAttr: "en",
   title: "Hangzhou Scooter Technology Co., Ltd. — about.scooter.work",
   description:
-    "Hangzhou Scooter Technology Co., Ltd. (Scooter.work), founded in 2024 in Linping, Hangzhou, specializes in cross-border electric scooter operations, product development, warehousing, and after-sales support.",
+    "Hangzhou Scooter Technology Co., Ltd. (Scooter.work), founded in 2024 in Linping, Hangzhou, specializes in cross-border electric scooter operations, visual design, warehousing, and after-sales support.",
   nav: {
     ariaLabel: "Primary navigation",
     home: "Home",
@@ -22,7 +22,7 @@ const english = {
     about: "Overview",
     brands: "Brands",
     operations: "Operations",
-    facilities: "Facilities & R&D",
+    facilities: "Warehouse & Service",
     partnership: "Partnership",
     contact: "Contact",
     mainSite: "scooter.work",
@@ -35,7 +35,7 @@ const english = {
     companySub: "杭州斯古特科技有限公司",
     headline: "Cross-Border Operations for Electric Scooters",
     summary:
-      "Founded in 2024 in Linping, Hangzhou, we are a cross-border e-commerce company focused on electric scooters. Our 12-person team covers product development, independent store operations, warehousing, logistics, and after-sales service.",
+      "Founded in 2024 in Linping, Hangzhou, we are a cross-border e-commerce company focused on electric scooters. Our 12-person team covers visual design, independent store operations, warehousing, logistics, and after-sales service.",
     primaryCta: "Business Inquiries",
     secondaryCta: "Visit scooter.work",
     signAlt: "Hangzhou Scooter Technology Co., Ltd. company signage",
@@ -53,7 +53,7 @@ const english = {
     departmentsTitle: "Organization",
     departments: [
       { name: "Operations", detail: "Independent DTC stores and marketplace channels across Europe, North America, and Australia." },
-      { name: "Product Development", detail: "Aftermarket electric scooter upgrades, accessories, and JOFEN complete vehicles." },
+      { name: "Visual Design", detail: "Brand storefront UI, product visual merchandising, and localized marketing creatives." },
       { name: "Logistics", detail: "Cross-border freight, overseas warehousing, and order fulfillment." },
       { name: "After-Sales", detail: "Local customer support, spare parts supply, and technical guides." },
     ],
@@ -97,7 +97,7 @@ const english = {
       href: "https://jofenscooter.com",
       domain: "jofenscooter.com",
       description:
-        "Our proprietary brand. Started with electric scooter modification accessories and now launching complete electric scooters focused on practicality and performance.",
+        "Our retail mobility brand offering practical electric scooters and everyday riding accessories for global riders.",
     },
   },
   operations: {
@@ -106,37 +106,28 @@ const english = {
       "We operate self-run independent stores as our primary channel across Europe, North America, and Australia, alongside AliExpress, Amazon, and other platforms.",
     points: [
       {
-        title: "Custom Shopify Extensions",
+        title: "Shopify Storefront Extensions",
         detail:
-          "In-house development and deployment of Shopify apps, including Germany warehouse stock display, store dashboards, bulk discounts, order export, and catalog tools.",
+          "Deployment and integration of tailored Shopify storefront tools, including Germany warehouse stock display, store dashboards, bulk discounts, order export, and catalog workflows.",
       },
       {
-        title: "Internal Productivity Tools",
+        title: "Operations Productivity Tools",
         detail:
-          "Self-built tools for multi-store order CSV logistics reconciliation (YunExpress, SF International) and batch AI translation for Shopify Translate & Adapt.",
+          "Workflow tools for multi-store order CSV logistics reconciliation (YunExpress, SF International) and batch AI translation for Shopify Translate & Adapt.",
       },
     ],
     trophyAlt: "Official Shopify achievement milestone trophy",
     trophyCaption: "Official Shopify achievement milestone trophy",
   },
   facilities: {
-    title: "Warehouse & Workshop",
+    title: "Warehouse & Operations Center",
     photos: [
-      { src: "/images/company/scooter-fleet.jpg", caption: "Multi-model test scooter lineup" },
-      { src: "/images/company/printer-3d.jpg", caption: "Industrial 3D printer (LEADER 3D)" },
-      { src: "/images/company/workshop-rig.jpg", caption: "Prototyping & machining bench" },
-      { src: "/images/company/warehouse-racks.jpg", caption: "Component & controller inventory racks" },
-      { src: "/images/company/parts-bench.jpg", caption: "Spare parts shelving & assembly table" },
+      { src: "/images/company/scooter-fleet.jpg", caption: "Display & after-sales service fleet" },
+      { src: "/images/company/warehouse-racks.jpg", caption: "Inventory shelving & packaging racks" },
+      { src: "/images/company/parts-bench.jpg", caption: "After-sales parts & service bench" },
       { src: "/images/company/dispatch-desk.jpg", caption: "Inspection & order dispatch workstation" },
     ],
-    rdTitle: "Selected In-House R&D Products",
-    rdItems: [
-      { name: "Built-In Scooter Alarm", image: "/images/alarm.jpg" },
-      { name: "Steering Damper", image: "/images/damper.webp" },
-      { name: "Motor & Controller Upgrade Kit", image: "/images/speed-kit.webp" },
-      { name: "Electric Scooter Trailer", image: "/images/scooter-trailer.jpg" },
-    ],
-    rdNote: "Also includes external electric scooter battery packs. For rider products and tutorials:",
+    serviceNote: "Explore our consumer parts hub and product support tutorials:",
   },
   partnership: {
     title: "Partnership Models",
@@ -175,7 +166,7 @@ const chinese: typeof english = {
   langAttr: "zh-CN",
   title: "杭州斯古特科技有限公司 — about.scooter.work",
   description:
-    "杭州斯古特科技有限公司成立于 2024 年，总部位于杭州临平，是一家专注于电动滑板车出海的跨境电商企业，具备产品开发、独立站运营、仓储物流与售后服务的完整出海链路。",
+    "杭州斯古特科技有限公司成立于 2024 年，总部位于杭州临平，是一家专注于电动滑板车出海的跨境电商企业，具备视觉设计、独立站运营、仓储物流与售后服务的完整出海链路。",
   nav: {
     ariaLabel: "主导航",
     home: "首页",
@@ -188,7 +179,7 @@ const chinese: typeof english = {
     about: "公司简介",
     brands: "合作伙伴",
     operations: "跨境运营",
-    facilities: "仓库与研发",
+    facilities: "仓库与服务",
     partnership: "合作方式",
     contact: "联系我们",
     mainSite: "scooter.work",
@@ -201,14 +192,14 @@ const chinese: typeof english = {
     companySub: "Hangzhou Scooter Technology Co., Ltd.",
     headline: "专注电动滑板车出海的跨境电商企业",
     summary:
-      "杭州斯古特科技有限公司成立于 2024 年，总部位于杭州临平。公司团队 12 人，设有运营部、售后部、物流部和产品开发部，形成了从产品开发、独立站运营到仓储物流与售后服务的完整出海链路。",
+      "杭州斯古特科技有限公司成立于 2024 年，总部位于杭州临平。公司团队 12 人，设有运营部、售后部、物流部和视觉设计部，形成了从视觉设计、独立站运营到仓储物流与售后服务的完整出海链路。",
     primaryCta: "联系合作",
     secondaryCta: "访问 scooter.work",
     signAlt: "杭州斯古特科技有限公司企业铭牌",
     facts: [
       { value: "2024 年", label: "成立时间" },
       { value: "杭州临平", label: "公司总部" },
-      { value: "12 人", label: "运营 · 售后 · 物流 · 研发" },
+      { value: "12 人", label: "运营 · 售后 · 物流 · 视觉设计" },
       { value: "欧洲 · 北美 · 澳洲", label: "覆盖市场" },
     ],
   },
@@ -219,7 +210,7 @@ const chinese: typeof english = {
     departmentsTitle: "组织架构",
     departments: [
       { name: "运营部", detail: "负责欧洲、北美、澳洲自营独立站及平台渠道运营。" },
-      { name: "产品开发部", detail: "负责电动滑板车改装配件及自有品牌整车研发。" },
+      { name: "视觉设计部", detail: "负责独立站视觉呈现、产品图文详情及海外营销物料设计。" },
       { name: "物流部", detail: "负责跨境物流、海外仓储及订单履约。" },
       { name: "售后部", detail: "负责海外本地售后服务、备件支持与使用指导。" },
     ],
@@ -263,7 +254,7 @@ const chinese: typeof english = {
       href: "https://jofenscooter.com",
       domain: "jofenscooter.com",
       description:
-        "公司自有品牌，起步于电动滑板车改装配件。现正推出电动滑板车整车，主打实用与性能。",
+        "公司旗下零售品牌，面向海外市场提供实用可靠的电动滑板车及日常骑行配件。",
     },
   },
   operations: {
@@ -272,37 +263,28 @@ const chinese: typeof english = {
       "公司以自营独立站为核心渠道，覆盖欧洲、北美和澳洲市场，同时布局速卖通、亚马逊等第三方平台，形成独立站为主、平台渠道为辅的跨境销售网络。",
     points: [
       {
-        title: "Shopify 扩展程序自研",
+        title: "Shopify 店铺扩展应用部署",
         detail:
-          "具备自主开发与部署 Shopify 扩展程序的能力，支持德国仓库存显示、店铺看板、批量折扣、订单导出及产品目录管理。",
+          "具备定制化 Shopify 店铺扩展的部署与集成能力，支持德国仓库存显示、店铺看板、批量折扣、订单导出及商品目录管理。",
       },
       {
-        title: "团队效率工具",
+        title: "跨境运营效率工具",
         detail:
-          "自主开发多商店订单与物流费导出工具（支持云途、顺丰国际）及 Shopify 批量 AI 翻译工具，提升日常运营效率。",
+          "搭建多商店订单与物流费导出工具（支持云途、顺丰国际）及 Shopify 批量 AI 翻译流程，提升多语种店铺运营效率。",
       },
     ],
     trophyAlt: "来自 Shopify 官方的成就纪念碑",
     trophyCaption: "来自 Shopify 官方的成就纪念碑",
   },
   facilities: {
-    title: "仓库与工作室",
+    title: "仓库与运营中心",
     photos: [
-      { src: "/images/company/scooter-fleet.jpg", caption: "多型号实车测试车队" },
-      { src: "/images/company/printer-3d.jpg", caption: "LEADER 3D 打印设备" },
-      { src: "/images/company/workshop-rig.jpg", caption: "结构打样与加工工位" },
-      { src: "/images/company/warehouse-racks.jpg", caption: "配件仓储货架" },
-      { src: "/images/company/parts-bench.jpg", caption: "零配件货架与装配台" },
-      { src: "/images/company/dispatch-desk.jpg", caption: "质检与发货工位" },
+      { src: "/images/company/scooter-fleet.jpg", caption: "展示与售后样车区" },
+      { src: "/images/company/warehouse-racks.jpg", caption: "备货仓储货架区" },
+      { src: "/images/company/parts-bench.jpg", caption: "售后配件与服务工位" },
+      { src: "/images/company/dispatch-desk.jpg", caption: "质检与订单发货工位" },
     ],
-    rdTitle: "我们研发的部分产品",
-    rdItems: [
-      { name: "电动滑板车内置报警器", image: "/images/alarm.jpg" },
-      { name: "电动滑板车阻尼器", image: "/images/damper.webp" },
-      { name: "电机与控制器升级套件", image: "/images/speed-kit.webp" },
-      { name: "电动滑板车拖车", image: "/images/scooter-trailer.jpg" },
-    ],
-    rdNote: "另含电动滑板车外置电池等配件。产品详情与安装教程请访问：",
+    serviceNote: "欢迎访问面向终端用户的产品配件站与使用教程站：",
   },
   partnership: {
     title: "合作方式",
