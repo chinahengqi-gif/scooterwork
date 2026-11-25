@@ -233,7 +233,6 @@ const year = new Date().getFullYear();
           <div class="coop-grid">
             {copy.partnership.models.map((model) => (
               <article class="coop-card">
-                <span class="coop-code">{model.code}</span>
                 <h3>{model.title}</h3>
                 <p>{model.detail}</p>
               </article>
@@ -843,39 +842,30 @@ const year = new Date().getFullYear();
   .coop-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    border-top: 2px solid var(--ink);
-    border-left: 1px solid var(--border);
-    background: var(--white);
+    gap: 20px;
   }
   .coop-card {
     display: flex;
     flex-direction: column;
-    padding: 32px 28px 34px;
-    border-right: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
+    padding: 32px 28px;
+    background: var(--white);
+    border: 1px solid #c2c9d4;
     border-radius: 0;
-    transition: background 150ms ease;
+    transition: border-color 150ms ease, background 150ms ease;
   }
   .coop-card:hover {
+    border-color: var(--orange);
     background: var(--gray-soft);
   }
-  .coop-code {
-    display: block;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1;
-    letter-spacing: -0.03em;
-    font-variant-numeric: tabular-nums;
-    color: var(--orange);
-    padding-bottom: 18px;
-    margin-bottom: 22px;
-    border-bottom: 1px solid #eceff3;
-  }
   .coop-card h3 {
-    font-size: 19px;
+    font-size: 24px;
     font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
     color: var(--ink);
-    margin-bottom: 10px;
+    padding-bottom: 14px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #e4e8ee;
   }
   .coop-card p {
     font-size: 14.5px;

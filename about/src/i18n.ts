@@ -135,19 +135,16 @@ const english = {
       "We seek agency and distribution partnerships for electric scooters and accessories, combining our independent stores, marketplaces, local warehousing, and after-sales service to grow brand sales in Europe, North America, and Australia.",
     models: [
       {
-        code: "01",
         title: "Brand Agency",
         detail:
           "Regional agency sales and brand promotion across Europe, North America, and Australia, covering dedicated storefronts, localized visual design, and market expansion.",
       },
       {
-        code: "02",
         title: "Product Distribution",
         detail:
           "Fast rollout across our self-operated DTC stores, AliExpress, Amazon, and major marketplaces with multilingual catalogs and multi-store inventory sync.",
       },
       {
-        code: "03",
         title: "End-to-End Operations",
         detail:
           "One-stop execution covering overseas warehousing, cross-border fulfillment, local after-sales parts and service, performance advertising, and content marketing.",
@@ -298,19 +295,16 @@ const chinese: typeof english = {
       "公司寻求与电动滑板车及配件的代理分销合作，依托自营独立站和平台渠道覆盖欧洲、北美和澳洲市场，配套本地仓储物流与售后服务体系，帮助品牌提升销售。",
     models: [
       {
-        code: "01",
         title: "品牌代理",
         detail:
           "承接品牌在欧洲、北美及澳洲市场的代理销售与推广，覆盖独立站搭建、本地化视觉呈现与区域市场拓展。",
       },
       {
-        code: "02",
         title: "产品分销",
         detail:
           "依托自营垂类独立站与速卖通、亚马逊等主流跨境平台快速铺货，支持多语种商品目录与多店铺库存同步。",
       },
       {
-        code: "03",
         title: "全链路承接",
         detail:
           "提供海外仓储履约、跨境物流对接、本地售后维修与备件支持，并配套海外广告投放与内容营销服务。",
