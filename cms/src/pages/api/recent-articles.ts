@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { getEmDashCollection } from "emdash";
 import { localizedPath, type Locale } from "../../../../src/i18n";
+import { guideCovers } from "../../lib/guide-covers";
 
 const pageSize = 10;
 const headers = {
@@ -19,7 +20,7 @@ function readPage(locale: Locale, offset: number) {
   });
 }
 
-export const GET: APIRoute = async ({ url }) => {
+export const GET: APIRoute = async ({ url, locals }) => {
   const requested = url.searchParams.get("locale");
   let locale: Locale = requested === "de" || requested === "fr" ? requested : "en";
   const page = Number(url.searchParams.get("page") ?? "1");
@@ -37,11 +38,18 @@ export const GET: APIRoute = async ({ url }) => {
     return Response.json({ error: "Recent articles unavailable" }, { status: 503, headers });
   }
 
+  const covers = await guideCovers(result.entries, {
+    db: locals.emdash?.db,
+    locale,
+    resolveMediaUrl: locals.emdash?.getPublicMediaUrl,
+  });
+
   const articles = result.entries.map(({ id, data }) => ({
     title: String(data.title || ""),
     summary: String(data.summary || ""),
     path: localizedPath(locale, `articles/${encodeURIComponent(String(data.slug || id.split("/").pop()))}/`),
     publishedAt: data.publishedAt ?? null,
+    image: covers.get(String(data.id || "")) || "",
   }));
   return Response.json({ articles, locale, hasMore: Boolean(result.hasMore) }, { headers });
 };

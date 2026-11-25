@@ -4,6 +4,7 @@ import { PortableText } from "emdash/ui";
 import LanguageSwitcher from "../../../src/components/LanguageSwitcher.astro";
 import { localizedPath, type Locale } from "../../../src/i18n";
 import { productCategories } from "../lib/product-categories";
+import { guideCovers, resolveSeoImageUrl } from "../lib/guide-covers";
 
 const segments = (Astro.params.path || "").split("/").filter(Boolean);
 const locale: Locale = segments[0] === "de" || segments[0] === "fr" ? segments.shift() as Locale : "en";
@@ -40,6 +41,16 @@ function safeMedia(value: unknown) {
   try { const url = new URL(value); return url.protocol === "https:" && url.hostname === "media.scooter.work" ? url.href : undefined; } catch { return undefined; }
 }
 const video = safeMedia(article?.data.video_url);
+const covers = isProduct && entries.length
+  ? await guideCovers(entries, { db: Astro.locals.emdash?.db, locale, resolveMediaUrl: Astro.locals.emdash?.getPublicMediaUrl })
+  : new Map<string, string>();
+let ogImage = article
+  ? resolveSeoImageUrl((article.data as { seo?: { image?: unknown } }).seo?.image, Astro.locals.emdash?.getPublicMediaUrl)
+  : "";
+if (article && !ogImage) {
+  const articleCovers = await guideCovers([article], { db: Astro.locals.emdash?.db, locale, resolveMediaUrl: Astro.locals.emdash?.getPublicMediaUrl });
+  ogImage = articleCovers.get(String(article.data.id || "")) || safeMedia(article.data.poster_url) || "";
+}
 ---
 
 <!doctype html>
@@ -49,6 +60,7 @@ const video = safeMedia(article?.data.video_url);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title} — Scooter.work</title>
     <meta name="description" content={article?.data.summary || product?.description || labels.intro} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
     <link rel="canonical" href={new URL(localizedPath(locale, page), Astro.site)} />
     <link rel="icon" type="image/png" href="/logo.png" />
     <link rel="apple-touch-icon" href="/logo.png" />
@@ -72,11 +84,15 @@ const video = safeMedia(article?.data.video_url);
         </a>
       ))}</div>}
       {isProduct && <section class="articles">
-        {failed ? <p>{labels.error}</p> : entries.length ? entries.map(entry => (
-          <a class="article-card" href={localizedPath(locale, `articles/${encodeURIComponent(String(entry.data.slug || entry.id.split("/").pop()))}/`)}>
-            <h2>{entry.data.title} <span>↗</span></h2><p>{entry.data.summary}</p>
-          </a>
-        )) : <p>{labels.empty}</p>}
+        {failed ? <p>{labels.error}</p> : entries.length ? entries.map(entry => {
+          const cover = covers.get(String(entry.data.id || "")) || "";
+          return (
+            <a class="article-card" href={localizedPath(locale, `articles/${encodeURIComponent(String(entry.data.slug || entry.id.split("/").pop()))}/`)}>
+              {cover && <img class="article-cover" src={cover} alt="" loading="lazy" />}
+              <h2>{entry.data.title} <span>↗</span></h2><p>{entry.data.summary}</p>
+            </a>
+          );
+        }) : <p>{labels.empty}</p>}
       </section>}
       {article && <article>
         {article.data.summary && <p class="intro">{article.data.summary}</p>}
@@ -111,7 +127,8 @@ const video = safeMedia(article?.data.video_url);
   .product, .article-card { display: block; padding: 20px; background: var(--panel); border: 1px solid var(--line); }
   .product img { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: contain; background: #fff; }
   h2 { font-size: 1.2rem; overflow-wrap: anywhere; }
-  .articles { display: grid; gap: 20px; margin-block: 40px; }
+  .articles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 20px; margin-block: 40px; }
+  .article-card .article-cover { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; margin-bottom: 14px; }
   article { max-width: 860px; margin-block: 40px; overflow-wrap: anywhere; }
   article :global(img), article :global(video), video { max-width: 100%; height: auto; }
   video { width: 100%; background: #000; margin-bottom: 24px; }
