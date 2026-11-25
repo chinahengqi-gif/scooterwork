@@ -212,13 +212,6 @@ const year = new Date().getFullYear();
               </figure>
             ))}
           </div>
-
-          <p class="service-note">
-            {copy.facilities.serviceNote}{" "}
-            <a href="https://scooter.work/" target="_blank" rel="noreferrer">scooter.work ↗</a>
-            {" · "}
-            <a href="https://guides.scooter.work/" target="_blank" rel="noreferrer">guides.scooter.work ↗</a>
-          </p>
         </div>
       </section>
 
@@ -684,15 +677,23 @@ const year = new Date().getFullYear();
     line-height: 1.75;
   }
   .text-link {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
     margin-top: 18px;
-    font-size: 13.5px;
-    font-weight: 600;
+    padding: 9px 16px;
+    border: 1px solid var(--orange);
+    border-radius: 0;
+    background: #fff4ec;
     color: var(--orange);
+    font-size: 13px;
+    font-weight: 600;
+    transition: background 150ms ease, color 150ms ease;
   }
   .text-link:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
+    background: var(--orange);
+    color: var(--white);
   }
 
   .own-brand-row {
@@ -721,7 +722,7 @@ const year = new Date().getFullYear();
     line-height: 1.8;
   }
   .own-brand-body .text-link {
-    margin-top: 12px;
+    margin-top: 14px;
   }
 
   /* OPERATIONS */
@@ -798,19 +799,6 @@ const year = new Date().getFullYear();
     font-weight: 500;
     color: var(--ink);
     border-top: 1px solid var(--border);
-  }
-  .service-note {
-    margin-top: 24px;
-    font-size: 14px;
-    color: var(--ink-muted);
-  }
-  .service-note a {
-    color: var(--orange);
-    font-weight: 600;
-  }
-  .service-note a:hover {
-    text-decoration: underline;
-    text-underline-offset: 3px;
   }
 
   /* PARTNERSHIP */

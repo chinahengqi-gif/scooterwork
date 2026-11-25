@@ -127,7 +127,6 @@ const english = {
       { src: "/images/company/parts-bench.jpg", caption: "After-sales parts & service bench" },
       { src: "/images/company/dispatch-desk.jpg", caption: "Inspection & order dispatch workstation" },
     ],
-    serviceNote: "Explore our consumer parts hub and product support tutorials:",
   },
   partnership: {
     title: "Partnership Models",
@@ -284,7 +283,6 @@ const chinese: typeof english = {
       { src: "/images/company/parts-bench.jpg", caption: "售后配件与服务工位" },
       { src: "/images/company/dispatch-desk.jpg", caption: "质检与订单发货工位" },
     ],
-    serviceNote: "欢迎访问面向终端用户的产品配件站与使用教程站：",
   },
   partnership: {
     title: "合作方式",
