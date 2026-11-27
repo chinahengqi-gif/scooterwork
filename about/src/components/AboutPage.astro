@@ -147,6 +147,7 @@ const year = new Date().getFullYear();
               <article class="partner-card">
                 <div class="partner-logo">
                   <img class={partner.logoClass} src={partner.logo} alt={partner.name} loading="lazy" />
+                  {partner.badge && <span class="partner-badge">{partner.badge}</span>}
                 </div>
                 <p>{partner.description}</p>
                 <a class="btn btn-primary store-btn" href={partner.href} target="_blank" rel="noreferrer">
@@ -691,7 +692,7 @@ const year = new Date().getFullYear();
   /* BRANDS */
   .partner-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
   }
   .partner-card {
@@ -706,9 +707,23 @@ const year = new Date().getFullYear();
     height: 76px;
     display: flex;
     align-items: center;
+    gap: 10px;
     padding-bottom: 16px;
     margin-bottom: 18px;
     border-bottom: 1px solid #eef0f2;
+  }
+  .partner-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 8px;
+    border: 1px solid #d5dae1;
+    background: var(--gray-soft);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    flex-shrink: 0;
   }
   .partner-logo img {
     object-fit: contain;

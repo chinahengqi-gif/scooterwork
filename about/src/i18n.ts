@@ -70,6 +70,7 @@ const english = {
         logoClass: "logo-mark",
         href: "https://kukirinprime.com",
         domain: "kukirinprime.com",
+        badge: "",
         description:
           "An off-road and high-performance electric scooter brand known for high-power dual-motor models, with a strong user base as a mainstream performance brand in Europe.",
       },
@@ -79,8 +80,19 @@ const english = {
         logoClass: "logo-wide",
         href: "https://joyorprime.com",
         domain: "joyorprime.com",
+        badge: "",
         description:
           "An original electric scooter R&D and manufacturing brand focused on all-terrain capability and performance. Core brand of our self-operated DTC stores across Europe.",
+      },
+      {
+        name: "JOYOR US",
+        logo: "/images/joyor-us.avif",
+        logoClass: "logo-wide",
+        href: "https://joyorscooter.us",
+        domain: "joyorscooter.us",
+        badge: "US",
+        description:
+          "Dedicated JOYOR online store for the United States, offering commuter and all-terrain electric scooters with local fulfillment and customer support.",
       },
       {
         name: "NAVEE",
@@ -88,6 +100,7 @@ const english = {
         logoClass: "logo-wide",
         href: "https://naveescooter.com",
         domain: "naveescooter.com",
+        badge: "",
         description:
           "Dreame Technology's smart mobility brand launched in 2021 for urban commuting—top three in Europe and sold in over 60 countries and regions.",
       },
@@ -230,6 +243,7 @@ const chinese: typeof english = {
         logoClass: "logo-mark",
         href: "https://kukirinprime.com",
         domain: "kukirinprime.com",
+        badge: "",
         description:
           "主打越野与高性能的电动滑板车品牌，以双电机大功率车型著称。在欧洲市场拥有广泛的用户基础，是当地主流的性能车品牌之一。",
       },
@@ -239,8 +253,19 @@ const chinese: typeof english = {
         logoClass: "logo-wide",
         href: "https://joyorprime.com",
         domain: "joyorprime.com",
+        badge: "",
         description:
           "专注电动滑板车研发制造的源头品牌，产品主打全地形能力与高性能。是公司自营独立站的核心品牌，覆盖欧洲多个市场。",
+      },
+      {
+        name: "JOYOR US",
+        logo: "/images/joyor-us.avif",
+        logoClass: "logo-wide",
+        href: "https://joyorscooter.us",
+        domain: "joyorscooter.us",
+        badge: "US",
+        description:
+          "面向美国市场的 JOYOR 自营独立站，主力提供城市通勤与全地形电动滑板车及配件，并配套当地仓储履约与售后服务。",
       },
       {
         name: "NAVEE",
@@ -248,6 +273,7 @@ const chinese: typeof english = {
         logoClass: "logo-wide",
         href: "https://naveescooter.com",
         domain: "naveescooter.com",
+        badge: "",
         description:
           "追觅科技旗下智能出行品牌，2021 年推出，以城市通勤电动滑板车为主力产品。现已进入欧洲市场前三、覆盖 60 多个国家和地区。",
       },
